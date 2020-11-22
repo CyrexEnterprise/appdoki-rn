@@ -1,7 +1,9 @@
 import { StatusBar } from 'react-native'
+import changeNavigationBarColor from 'react-native-navigation-bar-color'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { StoreonModule } from 'storeon'
 import { State, Events } from 'store/types'
+import { theme } from 'constants/theme'
 import { PreferencesStore, ThemeType } from './types'
 
 const STORAGE_KEY = '@preferences'
@@ -59,5 +61,18 @@ export const preferences: StoreonModule<State, Events> = (store) => {
 }
 
 function updateSatusBar (themeType: ThemeType) {
-  StatusBar.setBarStyle(themeType === 'dark' ? 'light-content' : 'dark-content', true)
+  const { colors } = theme(themeType)
+  const isLightContent = themeType === 'dark'
+  const color = colors.surface
+
+  StatusBar.setBackgroundColor(color, true)
+  StatusBar.setBarStyle(isLightContent ? 'light-content' : 'dark-content', true)
+
+  try {
+    changeNavigationBarColor(color, !isLightContent, true)
+  } catch (error) {
+    if (__DEV__) {
+      console.error(error)
+    }
+  }
 }
