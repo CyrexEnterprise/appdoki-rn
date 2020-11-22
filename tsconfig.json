@@ -1,0 +1,36 @@
+{
+	"compilerOptions": {
+    "module": "esnext",
+		"target": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+		"allowJs": true,
+		"noEmit": true,
+		"strict": true,
+		"isolatedModules": false,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "noImplicitAny": true,
+    "jsx": "react",
+    "skipLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "*": [
+        "src/*"
+      ]
+    }
+  },
+	"include": [
+    "index.js",
+    "metro.config.js",
+    "babel.config.js",
+		"src/**/*"
+	],
+  "exclude": [
+    "node_modules"
+  ]
+}

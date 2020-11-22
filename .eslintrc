@@ -1,0 +1,62 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "plugins": ["@typescript-eslint", "react-native-globals", "react", "react-hooks"],
+  "extends": [
+    "standard",
+    "plugin:@typescript-eslint/recommended",
+    "standard-react",
+    "plugin:react-hooks/recommended"
+  ],
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true,
+    "jest": true,
+    "react-native-globals/all": true
+  },
+  "rules": {
+    "react/prop-types": "off",
+    "react/jsx-handler-names": "off",
+    "react/jsx-pascal-case": "off",
+    "semi": "error",
+    "prefer-const": "error",
+    "no-var": "error",
+    "comma-dangle": ["error", "always-multiline"],
+    "max-len": ["error", { "code": 120, "ignoreStrings": true, "ignoreTemplateLiterals": true, "ignoreRegExpLiterals": true }],
+    "no-prototype-builtins": "off",
+    "no-throw-literal": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/no-unused-vars": ["error", {
+      "vars": "all",
+      "args": "after-used",
+      "varsIgnorePattern": "[_]",
+      "ignoreRestSiblings": true
+    }],
+    "@typescript-eslint/indent": ["error", 2],
+    "@typescript-eslint/no-object-literal-type-assertion": "off",
+    "@typescript-eslint/member-delimiter-style": ["error", { "multiline": { "delimiter": "comma", "requireLast": true }}],
+    "@typescript-eslint/member-ordering": ["error"],
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "@typescript-eslint/ban-ts-ignore": "off",
+    "@typescript-eslint/camelcase": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/ban-ts-comment": "off"
+  },
+  "overrides": [
+    {
+      "files": ["*.js"],
+      "rules": {
+        "@typescript-eslint/no-var-requires": "off"
+      }
+    }
+  ]
+}
