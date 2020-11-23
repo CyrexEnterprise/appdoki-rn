@@ -1,4 +1,4 @@
-import { StatusBar } from 'react-native'
+import { Platform, StatusBar } from 'react-native'
 import changeNavigationBarColor from 'react-native-navigation-bar-color'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { StoreonModule } from 'storeon'
@@ -65,14 +65,18 @@ function updateSatusBar (themeType: ThemeType) {
   const isLightContent = themeType === 'dark'
   const color = colors.surface
 
-  StatusBar.setBackgroundColor(color, true)
   StatusBar.setBarStyle(isLightContent ? 'light-content' : 'dark-content', true)
 
-  try {
-    changeNavigationBarColor(color, !isLightContent, true)
-  } catch (error) {
-    if (__DEV__) {
-      console.error(error)
+  // Only possible on android
+  if (Platform.OS === 'android') {
+    StatusBar.setBackgroundColor(color, true)
+
+    try {
+      changeNavigationBarColor(color, !isLightContent, true)
+    } catch (error) {
+      if (__DEV__) {
+        console.error(error)
+      }
     }
   }
 }
