@@ -28,7 +28,7 @@ export const auth: StoreonModule<State, Events> = (store) => {
     let user: User | undefined
 
     try {
-      gUser = await GoogleSignin.getCurrentUser()
+      gUser = await GoogleSignin.signInSilently()
 
       if (gUser) {
         user = await request(`${API_URL}/auth/user`, {
