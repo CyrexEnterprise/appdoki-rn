@@ -22,7 +22,7 @@ export const theme = (type: 'light' | 'dark'): AppTheme => {
       ...PaperDarkTheme.colors,
       ...NavigationDarkTheme.colors,
       background: '#1E1E1E',
-      surface: '#333333ff',
+      surface: '#333333',
     },
   }
 
