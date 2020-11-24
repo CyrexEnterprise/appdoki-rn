@@ -20,6 +20,7 @@ DerivedData
 *.hmap
 *.ipa
 *.xcuserstate
+*.app.dSYM.zip
 
 # Android/IntelliJ
 #
@@ -63,3 +64,4 @@ buck-out/
 GoogleService-Info.plist
 google-services.json
 ios/tmp.xcconfig
+fastlane/report.xml
