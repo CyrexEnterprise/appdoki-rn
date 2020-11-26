@@ -22,4 +22,9 @@ export default StyleSheet.create({
     alignItems: 'center',
     padding: 16,
   },
+  endOfList: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 100,
+  },
 })

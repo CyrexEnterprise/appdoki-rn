@@ -3,7 +3,7 @@ import { AppTheme } from 'constants/theme'
 import React from 'react'
 import { ListRenderItem, View } from 'react-native'
 import { FlatList } from 'react-native-gesture-handler'
-import { Avatar, Paragraph, Surface, Title, useTheme } from 'react-native-paper'
+import { Avatar, Paragraph, Text, Title, useTheme } from 'react-native-paper'
 import { Beer } from 'store/beers/types'
 import { Events, State } from 'store/types'
 import { useStoreon } from 'storeon/react'
@@ -15,6 +15,8 @@ export const Feed: React.FC<FeedScreenProps> = () => {
   const { colors } = useTheme() as AppTheme
   const { beers } = useStoreon<State, Events>('beers')
 
+  const keyExtractor = (item: Beer) => `${item.giver.id}-${item.givenAt}`
+
   const renderItem: ListRenderItem<Beer> = ({ item }) => {
     const giverFName = item.giver.name.split(' ')[0]
     const receiverFName = item.receiver.name.split(' ')[0]
@@ -22,7 +24,7 @@ export const Feed: React.FC<FeedScreenProps> = () => {
     const receiverPic = item.receiver.picture
 
     return (
-      <Surface style={[styles.row, styles.feedItem]}>
+      <View style={[styles.row, styles.feedItem, { backgroundColor: colors.surface }]}>
         <View style={styles.userInfo}>
           {giverPic ? (
             <Avatar.Image size={50} source={{ uri: giverPic }} />
@@ -48,21 +50,28 @@ export const Feed: React.FC<FeedScreenProps> = () => {
 
           <Paragraph>{receiverFName}</Paragraph>
         </View>
-      </Surface>
+      </View>
     )
   }
 
-  const keyExtractor = (item: Beer) => `${item.giver.id}-${item.givenAt}`
+  const renderFooter: React.FC = () => {
+    return (
+      <View style={[styles.endOfList, { backgroundColor: colors.surface }]}>
+        <Text>That's it. Time for some beers?</Text>
+      </View>
+    )
+  }
 
   return (
     <View style={styles.flex}>
       <FlatList
         style={styles.flex}
         data={beers.beerLog}
-        renderItem={renderItem}
         keyExtractor={keyExtractor}
         showsVerticalScrollIndicator={false}
         showsHorizontalScrollIndicator={false}
+        renderItem={renderItem}
+        ListFooterComponent={renderFooter}
       />
     </View>
   )
