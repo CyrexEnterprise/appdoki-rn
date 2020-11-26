@@ -41,7 +41,7 @@ export const Feed: React.FC<FeedScreenProps> = () => {
 
         <View style={styles.userInfo}>
           {receiverPic ? (
-            <Avatar.Image size={50} source={{ uri: giverPic }} />
+            <Avatar.Image size={50} source={{ uri: receiverPic }} />
           ) : (
             <Avatar.Icon size={50} icon='guy-fawkes-mask' theme={{ colors: { primary: colors.accent } }} />
           )}
