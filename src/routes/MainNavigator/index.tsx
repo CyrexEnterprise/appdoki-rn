@@ -1,14 +1,15 @@
 import React from 'react'
 import { Image, TouchableOpacity, View } from 'react-native'
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native'
-import { StackHeaderProps } from '@react-navigation/stack'
+import { StackHeaderProps, TransitionPresets } from '@react-navigation/stack'
 import { createSharedElementStackNavigator } from 'react-navigation-shared-element'
 import { DrawerNavigationProp } from '@react-navigation/drawer'
-import { Appbar, Avatar, useTheme } from 'react-native-paper'
+import { Appbar, Avatar, Title, useTheme } from 'react-native-paper'
 import { useStoreon } from 'storeon/react'
 import { Events, State } from 'store/types'
 import LogoSrc from 'assets/logo.png'
 import { BottomNavigator } from 'routes/BottomNavigator'
+import { AppTitleContainer } from 'components/AppTitleContainer'
 import { GiveBeerList } from 'screens/GiveBeerList'
 import { GiveBeer } from 'screens/GiveBeer'
 
@@ -51,23 +52,19 @@ export const MainNavigator = () => {
             )}
           </TouchableOpacity>
         )}
-        <Appbar.Content
-          title={
-            title === 'Feed' ? (
-              <View style={styles.logoContainer}>
-                <Image
-                  style={styles.logo}
-                  source={LogoSrc}
-                />
-              </View>
-            ) : title
-          }
-          titleStyle={{
-            fontSize: 18,
-            fontWeight: 'bold',
-            color: theme.colors.primary,
-          }}
-        />
+
+        <AppTitleContainer>
+          {title === 'Feed' ? (
+            <View style={styles.logoContainer}>
+              <Image
+                style={styles.logo}
+                source={LogoSrc}
+              />
+            </View>
+          ) : <Title>{title}</Title>}
+        </AppTitleContainer>
+
+        <View style={{ width: 46 }} />
       </Appbar.Header>
     )
   }
@@ -89,13 +86,21 @@ export const MainNavigator = () => {
       <Stack.Screen
         name='GiveBeerList'
         component={GiveBeerList}
-        options={{ headerTitle: 'Beer Giver' }}
+        options={{
+          headerTitle: 'Beer Giver',
+          gestureEnabled: true,
+          ...TransitionPresets.SlideFromRightIOS,
+        }}
       />
 
       <Stack.Screen
         name='GiveBeer'
         component={GiveBeer}
-        options={{ header: () => null }}
+        options={{
+          header: () => null,
+          gestureEnabled: true,
+          ...TransitionPresets.SlideFromRightIOS,
+        }}
         sharedElementsConfig={(route) => {
           const { id } = route.params
           return [`item.${id}.avatar`]
