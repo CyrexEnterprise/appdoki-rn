@@ -12,7 +12,6 @@ export default StyleSheet.create({
     justifyContent: 'space-between',
     padding: 16,
     paddingHorizontal: 24,
-    elevation: 1,
   },
   userInfo: {
     alignItems: 'center',
@@ -20,5 +19,10 @@ export default StyleSheet.create({
   },
   arrow: {
     marginHorizontal: 16,
+  },
+  endOfList: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 100,
   },
 })
