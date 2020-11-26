@@ -14,6 +14,9 @@ import styles from './styles'
 import { GiveBeerScreenProps } from './types'
 
 export const GiveBeer: React.FC<GiveBeerScreenProps> = ({ route, navigation }) => {
+  // if you know portuguese I hope it made you smile :)
+  // else this means a pack of 24 if the context is beers
+  const UMA_GRADE = 24
   const timer = React.useRef<NodeJS.Timeout>()
   const completeTimer = React.useRef<NodeJS.Timeout>()
   const { colors } = useTheme() as AppTheme
@@ -24,7 +27,7 @@ export const GiveBeer: React.FC<GiveBeerScreenProps> = ({ route, navigation }) =
   const user = route.params
 
   function handleBeerButtnoPress () {
-    if (count < 24 && !complete) {
+    if (count < UMA_GRADE && !complete) {
       setCount(count + 1)
 
       if (progress > 0) {
