@@ -10,6 +10,9 @@ import com.facebook.react.ReactActivityDelegate;
 import com.facebook.react.ReactRootView;
 import com.swmansion.gesturehandler.react.RNGestureHandlerEnabledRootView;
 
+// for react-native-bootsplash
+import com.zoontek.rnbootsplash.RNBootSplash;
+
 public class MainActivity extends ReactActivity {
   /**
    * Returns the name of the main component registered from JavaScript. This is used to schedule
@@ -24,6 +27,9 @@ public class MainActivity extends ReactActivity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(null);
+
+    // for react-native-bootsplash
+    RNBootSplash.init(R.drawable.bootsplash, MainActivity.this);
   }
 
   // for react-native-gesture-handler
