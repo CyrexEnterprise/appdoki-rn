@@ -11,7 +11,6 @@ export default StyleSheet.create({
     width: 168,
     height: 200,
     overflow: 'hidden',
-    marginBottom: 32,
   },
   logo: {
     flex: 1,
@@ -19,6 +18,13 @@ export default StyleSheet.create({
     width: undefined,
     justifyContent: 'flex-end',
     resizeMode: 'cover',
+  },
+  buttonConatiner: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    bottom: -80,
+    alignItems: 'center',
   },
   gButton: {
     width: 192,
