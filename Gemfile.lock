@@ -175,6 +175,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  dotenv
   fastlane
   fastlane-plugin-firebase_app_distribution
 
