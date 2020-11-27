@@ -30,7 +30,7 @@ export const Login = () => {
           />
         </View>
 
-        <View style={styles.buttonConatiner}>
+        <View style={styles.buttonContainer}>
           {auth.loading ? (
             <ActivityIndicator animating size='large' />
           ) : auth.user ? null : (
