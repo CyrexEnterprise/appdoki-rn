@@ -19,7 +19,7 @@ export default StyleSheet.create({
     justifyContent: 'flex-end',
     resizeMode: 'cover',
   },
-  buttonConatiner: {
+  buttonContainer: {
     position: 'absolute',
     left: 0,
     right: 0,
