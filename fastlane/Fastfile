@@ -37,3 +37,32 @@ platform :ios do
     upload_to_testflight
   end
 end
+
+platform :android do
+  desc "Push a new build to firebase"
+  lane :alpha do
+    gradle(
+      project_dir: './android',
+      task: 'clean assemble',
+      build_type: 'Release'
+    )
+
+    firebase_app_distribution(
+      app: ENV['ANDROID_APP_ID']
+    )
+  end
+
+  desc "Push a new build to Google Play beta track"
+  lane :beta do
+    gradle(
+      project_dir: './android',
+      task: 'clean bundle',
+      build_type: 'Release'
+    )
+
+    upload_to_play_store(
+      track: 'beta',
+      skip_upload_apk: true
+    )
+  end
+end
