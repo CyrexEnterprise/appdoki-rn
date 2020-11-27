@@ -6,6 +6,8 @@
 
 // for @react-native-firebase/app
 #import <Firebase.h>
+// for react-native-bootsplash
+#import "RNBootSplash.h"
 
 #ifdef FB_SONARKIT_ENABLED
 #import <FlipperKit/FlipperClient.h>
@@ -51,6 +53,10 @@ static void InitializeFlipper(UIApplication *application) {
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
+
+  // for react-native-bootsplash
+  [RNBootSplash initWithStoryboard:@"BootSplash" rootView:rootView];
+
   return YES;
 }
 

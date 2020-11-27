@@ -12,6 +12,7 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		2AB10EFB257112440014298A /* BootSplash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2AB10EFA257112440014298A /* BootSplash.storyboard */; };
 		2ADDFC5E256818DE00FCFA3E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2ADDFC5D256818DE00FCFA3E /* GoogleService-Info.plist */; };
 		2BBB0EE90943F4CF8C36E54B /* libPods-appdoki-appdokiTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7582ACDA4DE4AF8FA6F042C9 /* libPods-appdoki-appdokiTests.a */; };
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
@@ -20,7 +21,6 @@
 		2DCD954D1E0B4F2C00145EB5 /* appdokiTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* appdokiTests.m */; };
 		427EAD6D63814D979A3CF652 /* libPods-appdoki-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E6CDDF9A37E896FD36F4BA99 /* libPods-appdoki-tvOS.a */; };
 		5AAC3411F3AB8D7452995368 /* libPods-appdoki-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F617EADDEBB2C4D6F5914F5F /* libPods-appdoki-tvOSTests.a */; };
-		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,13 +52,13 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = appdoki/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = appdoki/main.m; sourceTree = "<group>"; };
 		2A76A7AF2569EC3000E00D14 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
+		2AB10EFA257112440014298A /* BootSplash.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = BootSplash.storyboard; path = appdoki/BootSplash.storyboard; sourceTree = "<group>"; };
 		2ADDFC5D256818DE00FCFA3E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* appdoki-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "appdoki-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* appdoki-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "appdoki-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4BEBA10CB6A5B835AF0AEFF3 /* Pods-appdoki-appdokiTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-appdoki-appdokiTests.release.xcconfig"; path = "Target Support Files/Pods-appdoki-appdokiTests/Pods-appdoki-appdokiTests.release.xcconfig"; sourceTree = "<group>"; };
 		71C318D7F5399982DDEBD424 /* Pods-appdoki-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-appdoki-tvOS.release.xcconfig"; path = "Target Support Files/Pods-appdoki-tvOS/Pods-appdoki-tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		7582ACDA4DE4AF8FA6F042C9 /* libPods-appdoki-appdokiTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-appdoki-appdokiTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = appdoki/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8AD37477F21D524FA6A10FE7 /* libPods-appdoki.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-appdoki.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		90275565C727E4C3EE177E4B /* Pods-appdoki-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-appdoki-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-appdoki-tvOSTests/Pods-appdoki-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		C6FB97831D63158819D28487 /* Pods-appdoki-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-appdoki-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-appdoki-tvOS/Pods-appdoki-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
@@ -133,7 +133,7 @@
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
-				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
+				2AB10EFA257112440014298A /* BootSplash.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
 			);
 			name = appdoki;
@@ -351,9 +351,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				2ADDFC5E256818DE00FCFA3E /* GoogleService-Info.plist in Resources */,
+				2AB10EFB257112440014298A /* BootSplash.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

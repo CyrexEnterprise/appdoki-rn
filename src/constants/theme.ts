@@ -5,6 +5,7 @@ import { Theme as PaperTheme } from 'react-native-paper/lib/typescript/src/types
 export type AppTheme = PaperTheme & NavigationTheme & {
   colors: {
     amber: string,
+    darkBlue: string,
   },
 }
 
@@ -35,6 +36,7 @@ export const theme = (type: 'light' | 'dark'): AppTheme => {
       primary: '#0096ffff',
       accent: '#1cba91',
       amber: '#FFA000',
+      darkBlue: '#14283C',
     },
   }
 }
