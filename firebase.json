@@ -2,6 +2,7 @@
   "react-native": {
     "perf_auto_collection_enabled": false,
     "crashlytics_debug_enabled": false,
-    "analytics_auto_collection_enabled": false
+    "analytics_auto_collection_enabled": false,
+    "messaging_android_notification_channel_id": "high-priority"
   }
 }

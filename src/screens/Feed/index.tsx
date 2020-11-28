@@ -15,7 +15,7 @@ export const Feed: React.FC<FeedScreenProps> = () => {
   const { colors } = useTheme() as AppTheme
   const { beers } = useStoreon<State, Events>('beers')
 
-  const keyExtractor = (item: Beer) => `${item.giver.id}-${item.givenAt}`
+  const keyExtractor = (item: Beer) => `${item.giver.id}-${item.givenAt}-${item.receiver.id}`
 
   const renderItem: ListRenderItem<Beer> = ({ item }) => {
     const giverFName = item.giver.name.split(' ')[0]

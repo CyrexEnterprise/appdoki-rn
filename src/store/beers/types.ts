@@ -1,5 +1,5 @@
 import { ErrorReason } from 'util/request'
-import { GIVE_BEERS, GIVE_BEERS_ERROR, GIVE_BEERS_SUCCESS, LOAD_BEERS, LOAD_BEERS_ERROR, LOAD_BEERS_SUCCESS } from '.'
+import { BEER_LOG_EVENT, GIVE_BEERS, GIVE_BEERS_ERROR, GIVE_BEERS_SUCCESS, LOAD_BEERS, LOAD_BEERS_ERROR, LOAD_BEERS_SUCCESS } from '.'
 
 export interface BeersStore {
   loading: boolean,
@@ -15,10 +15,11 @@ export type BeersEvents = {
   [GIVE_BEERS]: { id: string; amount: number },
   [GIVE_BEERS_SUCCESS]: { amount: number },
   [GIVE_BEERS_ERROR]: ErrorReason,
+  [BEER_LOG_EVENT]: { beer: Beer },
 }
 
 export type Beer = {
-  beers: 0,
+  beers: number,
   giver: {
     id: string,
     name: string,
