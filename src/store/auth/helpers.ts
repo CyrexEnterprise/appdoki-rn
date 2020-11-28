@@ -6,7 +6,8 @@ import { LOAD_USERS, NEW_USER_EVENT } from 'store/users'
 import { store } from 'store'
 
 export enum FCM_TOPICS {
-  beers = 'beers'
+  beers = 'beers',
+  users = 'users'
 }
 
 export async function requestUserNotificationsPermission () {
@@ -47,8 +48,10 @@ export function onDeletedMessages (store: StoreonStore<State, Events>) {
 
 export async function subscribeToTopics () {
   await messaging().subscribeToTopic(FCM_TOPICS.beers)
+  await messaging().subscribeToTopic(FCM_TOPICS.users)
 }
 
 export async function unsubscribeFromTopics () {
   await messaging().unsubscribeFromTopic(FCM_TOPICS.beers)
+  await messaging().unsubscribeFromTopic(FCM_TOPICS.users)
 }
