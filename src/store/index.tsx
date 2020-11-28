@@ -7,7 +7,7 @@ import { preferences } from './preferences'
 import { users } from './users'
 import { beers } from './beers'
 
-const store = createStoreon<State, Events>([
+export const store = createStoreon<State, Events>([
   auth,
   preferences,
   users,

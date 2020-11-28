@@ -5,12 +5,13 @@ import { request } from 'util/request'
 import { API_URL } from '@env'
 import { Platform } from 'react-native'
 
-export const LOAD_BEERS = 'users/LOAD_BEERS'
-export const LOAD_BEERS_SUCCESS = 'users/LOAD_BEERS_SUCCESS'
-export const LOAD_BEERS_ERROR = 'users/LOAD_BEERS_ERROR'
-export const GIVE_BEERS = 'users/GIVE_BEERS'
-export const GIVE_BEERS_SUCCESS = 'users/GIVE_BEERS_SUCCESS'
-export const GIVE_BEERS_ERROR = 'users/GIVE_BEERS_ERROR'
+export const LOAD_BEERS = 'beers/LOAD_BEERS'
+export const LOAD_BEERS_SUCCESS = 'beers/LOAD_BEERS_SUCCESS'
+export const LOAD_BEERS_ERROR = 'beers/LOAD_BEERS_ERROR'
+export const GIVE_BEERS = 'beers/GIVE_BEERS'
+export const GIVE_BEERS_SUCCESS = 'beers/GIVE_BEERS_SUCCESS'
+export const GIVE_BEERS_ERROR = 'beers/GIVE_BEERS_ERROR'
+export const BEER_LOG_EVENT = 'beers/BEER_LOG_EVENT'
 
 export const beers: StoreonModule<State, Events> = (store) => {
   store.on('@init', () => {
@@ -116,6 +117,25 @@ export const beers: StoreonModule<State, Events> = (store) => {
       beers: {
         ...beers,
         given: beers.given + amount,
+      },
+    }
+  })
+
+  // add a single log to the state
+  store.on(BEER_LOG_EVENT, ({ beers, auth }, { beer }) => {
+    const topLog = beers.beerLog[0]
+    let newLog = [beer].concat(beers.beerLog)
+
+    // sort the log in case the beer received is older than the last log we have
+    if (topLog && topLog.givenAt > beer.givenAt) {
+      newLog = newLog.sort((a, b) => a.givenAt < b.givenAt ? 1 : -1)
+    }
+
+    return {
+      beers: {
+        ...beers,
+        beerLog: newLog,
+        received: beer.receiver.id === auth.user?.id ? beers.received + beer.beers : beers.received,
       },
     }
   })

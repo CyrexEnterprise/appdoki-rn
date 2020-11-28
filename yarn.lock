@@ -1480,6 +1480,11 @@
   dependencies:
     stacktrace-js "^2.0.0"
 
+"@react-native-firebase/messaging@10.1.0":
+  version "10.1.0"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/messaging/-/messaging-10.1.0.tgz#adbeaae52db5c2aea2f61a98490bd107dd444e97"
+  integrity sha512-g8lDlkxcA/0AXtfx79DQiELtvX9z81mskxEA0wJLEd1QetP1sQsvIvoMzHIsj8Zzj3+Gn0Hz+qFcz/pJJ8ceRQ==
+
 "@react-native-firebase/perf@10.0.0":
   version "10.0.0"
   resolved "https://registry.yarnpkg.com/@react-native-firebase/perf/-/perf-10.0.0.tgz#bfe24075925d686c314cf6432b75a7a3ca60eb81"

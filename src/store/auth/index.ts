@@ -1,3 +1,4 @@
+import messaging from '@react-native-firebase/messaging'
 import { StoreonModule } from 'storeon'
 import { State, Events } from 'store/types'
 import { Platform } from 'react-native'
@@ -5,6 +6,7 @@ import { API_URL } from '@env'
 import { GoogleSignin, statusCodes, User as GUser } from '@react-native-community/google-signin'
 import { request } from 'util/request'
 
+import { onDeletedMessages, onMessage, requestUserNotificationsPermission, subscribeToTopics, unsubscribeFromTopics } from './helpers'
 import { User } from './types'
 
 export const AUTH_WORK = 'auth/AUTH_WORK'
@@ -13,6 +15,9 @@ export const LOGIN_SUCCESS = 'auth/LOGIN_SUCCESS'
 export const LOGOUT = 'auth/LOGOUT'
 
 export const auth: StoreonModule<State, Events> = (store) => {
+  let unsubMessageListener = () => {}
+  let unsubDeletedMessagesListener = () => {}
+
   store.on('@init', () => {
     return {
       auth: {
@@ -108,9 +113,30 @@ export const auth: StoreonModule<State, Events> = (store) => {
     }
   })
 
-  // Revoke token
+  // ask for messaging permissions and subscribe to fcm messages and topics
+  store.on(LOGIN_SUCCESS, async () => {
+    const enabled = await requestUserNotificationsPermission()
+
+    if (enabled) {
+      unsubMessageListener = messaging().onMessage((message) => {
+        onMessage(message)
+      })
+
+      unsubDeletedMessagesListener = messaging().onDeletedMessages(() => onDeletedMessages(store))
+
+      await subscribeToTopics()
+    } else if (__DEV__) {
+      console.log('[AUTH] notifications permissions not enabled')
+    }
+  })
+
+  // Revoke token and unsubscribe from messages and topics
   store.on(LOGOUT, async () => {
     try {
+      unsubMessageListener()
+      unsubDeletedMessagesListener()
+      await unsubscribeFromTopics()
+
       await GoogleSignin.revokeAccess()
       await GoogleSignin.signOut()
     } catch (error) {
