@@ -1,13 +1,20 @@
 import React from 'react'
+import { AppState, AppStateStatus } from 'react-native'
 import { GS_WEB_CLIENT_ID } from '@env'
+import { enableScreens } from 'react-native-screens'
 import { GoogleSignin } from '@react-native-community/google-signin'
+import { FirebaseMessagingTypes } from '@react-native-firebase/messaging'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import { firebase as pfb } from '@react-native-firebase/perf'
 import { firebase as afb } from '@react-native-firebase/analytics'
-import { enableScreens } from 'react-native-screens'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
+import { MESSAGES_KEY } from 'constants/global'
 import { StoreProvider } from 'store'
+import { onMessage } from 'store/auth/helpers'
 import { ThemeProvider } from 'components/ThemeProvider'
 import { RootNavigator } from 'routes/RootNavigator'
+
+enableScreens()
 
 GoogleSignin.configure({
   webClientId: GS_WEB_CLIENT_ID,
@@ -19,9 +26,51 @@ if (!__DEV__) {
   afb.analytics().setAnalyticsCollectionEnabled(true)
 }
 
-enableScreens()
-
 export const App = () => {
+  const appState = React.useRef(AppState.currentState)
+
+  const handleAppStateChange = async (nextState: AppStateStatus) => {
+    // fire all the messages that we stored when in background - see the root index.js
+    if (appState.current.match(/inactive|background/) && nextState === 'active') {
+      try {
+        const messages = await AsyncStorage.getItem(MESSAGES_KEY)
+
+        if (messages == null) {
+          await AsyncStorage.setItem(MESSAGES_KEY, JSON.stringify([]))
+
+          throw new Error(`Invalid ${MESSAGES_KEY} state after read`)
+        }
+
+        const parsed = JSON.parse(messages)
+
+        if (Array.isArray(parsed)) {
+          parsed.forEach((message: FirebaseMessagingTypes.RemoteMessage) => {
+            onMessage(message)
+          })
+
+          if (parsed.length) {
+            // Reset the messages stored
+            await AsyncStorage.setItem(MESSAGES_KEY, JSON.stringify([]))
+          }
+        }
+      } catch (error) {
+        if (__DEV__) {
+          console.log(error)
+        }
+      }
+    }
+
+    appState.current = nextState
+  }
+
+  React.useEffect(() => {
+    AppState.addEventListener('change', handleAppStateChange)
+
+    return () => {
+      AppState.removeEventListener('change', handleAppStateChange)
+    }
+  }, [])
+
   return (
     <SafeAreaProvider>
       <StoreProvider>

@@ -7,13 +7,13 @@ import { AnimatedCircularProgress } from 'react-native-circular-progress'
 import { AppTheme } from 'constants/theme'
 import { useStoreon } from 'storeon/react'
 import { Events, State } from 'store/types'
-import { GIVE_BEERS } from 'store/beers'
+import { BEER_EVENTS } from 'store/beers/events'
 import { Icon } from 'components/Icon'
 
 import styles from './styles'
 import { GiveBeerScreenProps } from './types'
 
-export const GiveBeer: React.FC<GiveBeerScreenProps> = ({ route, navigation }) => {
+export const GiveBeerScreen: React.FC<GiveBeerScreenProps> = ({ route, navigation }) => {
   // if you know portuguese I hope it made you smile :)
   // else this means a pack of 24 if the context is beers
   const UMA_GRADE = 24
@@ -50,7 +50,7 @@ export const GiveBeer: React.FC<GiveBeerScreenProps> = ({ route, navigation }) =
 
     // FIXME: we need to check if the component is still mounted
     completeTimer.current = setTimeout(() => {
-      dispatch(GIVE_BEERS, { id: user.id, amount: count })
+      dispatch(BEER_EVENTS.GIVE, { id: user.id, amount: count })
       navigation.goBack()
     }, 800)
   }, [dispatch, user.id, count, navigation])

@@ -6,8 +6,8 @@ import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer'
 import { Avatar, Caption, Drawer, Paragraph, Switch, Text, Title, TouchableRipple, useTheme } from 'react-native-paper'
 import Animated from 'react-native-reanimated'
 import { Events, State } from 'store/types'
-import { TOGGLE_THEME } from 'store/preferences'
-import { LOGOUT } from 'store/auth'
+import { PREFERENCES_EVENTS } from 'store/preferences/events'
+import { AUTH_EVENTS } from 'store/auth/events'
 import { Icon } from 'components/Icon'
 
 import styles from './styles'
@@ -81,12 +81,12 @@ export const DrawerContent = (props: DrawerContentProps) => {
           <DrawerItem
             icon={({ color, size }) => <Icon name='logout' color={color} size={size} />}
             label='Logout'
-            onPress={() => dispatch(LOGOUT)}
+            onPress={() => dispatch(AUTH_EVENTS.LOGOUT)}
           />
         </Drawer.Section>
 
         <Drawer.Section title='Preferences'>
-          <TouchableRipple onPress={() => dispatch(TOGGLE_THEME)}>
+          <TouchableRipple onPress={() => dispatch(PREFERENCES_EVENTS.TOGGLE_THEME)}>
             <View style={styles.preference}>
               <Text>Dark Theme</Text>
               <View pointerEvents='none'>

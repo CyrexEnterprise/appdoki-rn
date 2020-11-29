@@ -1,15 +1,13 @@
-import { Platform, StatusBar } from 'react-native'
+import { AppState, Platform, StatusBar } from 'react-native'
 import changeNavigationBarColor from 'react-native-navigation-bar-color'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { StoreonModule } from 'storeon'
 import { State, Events } from 'store/types'
 import { theme } from 'constants/theme'
 import { PreferencesStore, ThemeType } from './types'
+import { PREFERENCES_EVENTS } from './events'
 
 const STORAGE_KEY = '@preferences'
-
-export const LOAD_PREFERENCES = 'preferences/LOAD_PREFERENCES'
-export const TOGGLE_THEME = 'preferences/toggleTheme'
 
 export const preferences: StoreonModule<State, Events> = (store) => {
   store.on('@init', async () => {
@@ -20,17 +18,17 @@ export const preferences: StoreonModule<State, Events> = (store) => {
         throw new Error(`Invalid ${STORAGE_KEY} state after read`)
       }
 
-      store.dispatch(LOAD_PREFERENCES, JSON.parse(jsonValue))
+      store.dispatch(PREFERENCES_EVENTS.LOAD, JSON.parse(jsonValue))
     } catch (error) {
       if (__DEV__) {
         console.log(error)
       }
 
-      store.dispatch(LOAD_PREFERENCES, { themeType: 'light' })
+      store.dispatch(PREFERENCES_EVENTS.LOAD, { themeType: 'light' })
     }
   })
 
-  store.on(LOAD_PREFERENCES, (_, preferences) => {
+  store.on(PREFERENCES_EVENTS.LOAD, (_, preferences) => {
     updateSatusBar(preferences.themeType)
 
     return {
@@ -38,7 +36,7 @@ export const preferences: StoreonModule<State, Events> = (store) => {
     }
   })
 
-  store.on(TOGGLE_THEME, ({ preferences }) => {
+  store.on(PREFERENCES_EVENTS.TOGGLE_THEME, ({ preferences }) => {
     const themeType = preferences.themeType === 'dark' ? 'light' : 'dark'
     const newPreferences: PreferencesStore = { ...preferences, themeType }
 
@@ -61,17 +59,25 @@ export const preferences: StoreonModule<State, Events> = (store) => {
 }
 
 function updateSatusBar (themeType: ThemeType) {
+  // if the app is not active this function call is useless and can cause problems
+  if (AppState.currentState !== 'active') return
+
   const { colors } = theme(themeType)
   const isLightContent = themeType === 'dark'
   const color = colors.surface
 
-  StatusBar.setBarStyle(isLightContent ? 'light-content' : 'dark-content', true)
+  try {
+    StatusBar.setBarStyle(isLightContent ? 'light-content' : 'dark-content', true)
+  } catch (error) {
+    if (__DEV__) {
+      console.error(error)
+    }
+  }
 
   // Only possible on android
   if (Platform.OS === 'android') {
-    StatusBar.setBackgroundColor(color, true)
-
     try {
+      StatusBar.setBackgroundColor(color, true)
       changeNavigationBarColor(color, !isLightContent, true)
     } catch (error) {
       if (__DEV__) {

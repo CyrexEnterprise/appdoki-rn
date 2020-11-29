@@ -5,8 +5,8 @@ import { useTheme, Portal, FAB } from 'react-native-paper'
 import { useSafeArea } from 'react-native-safe-area-context'
 import color from 'color'
 import overlay from 'util/overlay'
-import { Feed } from 'screens/Feed'
-import { Notifications } from 'screens/Notifications'
+import { FeedScreen } from 'screens/Feed'
+import { NotificationsScreen } from 'screens/Notifications'
 import { BeerTab } from 'screens/BeerTab'
 
 import { BottomNavigatorProps } from './types'
@@ -58,7 +58,7 @@ export const BottomNavigator = ({ route }: BottomNavigatorProps) => {
       >
         <Tab.Screen
           name='Feed'
-          component={Feed}
+          component={FeedScreen}
           options={{
             tabBarIcon: 'newspaper-variant-outline',
             tabBarColor,
@@ -67,7 +67,7 @@ export const BottomNavigator = ({ route }: BottomNavigatorProps) => {
 
         <Tab.Screen
           name='Notifications'
-          component={Notifications}
+          component={NotificationsScreen}
           options={{
             tabBarIcon: 'bell-outline',
             tabBarColor,
