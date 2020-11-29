@@ -1,4 +1,4 @@
-import { Platform, StatusBar } from 'react-native'
+import { AppState, Platform, StatusBar } from 'react-native'
 import changeNavigationBarColor from 'react-native-navigation-bar-color'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { StoreonModule } from 'storeon'
@@ -59,17 +59,25 @@ export const preferences: StoreonModule<State, Events> = (store) => {
 }
 
 function updateSatusBar (themeType: ThemeType) {
+  // if the app is not active this function call is useless and can cause problems
+  if (AppState.currentState !== 'active') return
+
   const { colors } = theme(themeType)
   const isLightContent = themeType === 'dark'
   const color = colors.surface
 
-  StatusBar.setBarStyle(isLightContent ? 'light-content' : 'dark-content', true)
+  try {
+    StatusBar.setBarStyle(isLightContent ? 'light-content' : 'dark-content', true)
+  } catch (error) {
+    if (__DEV__) {
+      console.error(error)
+    }
+  }
 
   // Only possible on android
   if (Platform.OS === 'android') {
-    StatusBar.setBackgroundColor(color, true)
-
     try {
+      StatusBar.setBackgroundColor(color, true)
       changeNavigationBarColor(color, !isLightContent, true)
     } catch (error) {
       if (__DEV__) {
