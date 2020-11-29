@@ -23,7 +23,6 @@ messaging().setBackgroundMessageHandler(async (message) => {
     const parsed = JSON.parse(messages)
 
     if (Array.isArray(parsed)) {
-      console.log('messages stored', parsed.length)
       await AsyncStorage.setItem(MESSAGES_KEY, JSON.stringify([...parsed, message]))
     } else {
       await AsyncStorage.setItem(MESSAGES_KEY, JSON.stringify([message]))
