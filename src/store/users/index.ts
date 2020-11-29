@@ -1,14 +1,10 @@
 import { StoreonModule } from 'storeon'
-import { State, Events } from 'store/types'
-import { LOGIN_SUCCESS } from 'store/auth'
-import { request } from 'util/request'
 import { API_URL } from '@env'
+import { State, Events } from 'store/types'
+import { AUTH_EVENTS } from 'store/auth/events'
+import { request } from 'util/request'
 import { Platform } from 'react-native'
-
-export const LOAD_USERS = 'users/LOAD_USERS'
-export const LOAD_USERS_SUCCESS = 'users/LOAD_USERS_SUCCESS'
-export const LOAD_USERS_ERROR = 'users/LOAD_USERS_ERROR'
-export const NEW_USER_EVENT = 'users/NEW_USER_EVENT'
+import { USERS_EVENTS } from './events'
 
 export const users: StoreonModule<State, Events> = (store) => {
   store.on('@init', () => {
@@ -21,10 +17,10 @@ export const users: StoreonModule<State, Events> = (store) => {
   })
 
   // load the users after login
-  store.on(LOGIN_SUCCESS, ({ users }, { token }) => {
+  store.on(AUTH_EVENTS.LOGIN_SUCCESS, ({ users }, { token }) => {
     if (!token) return
 
-    store.dispatch(LOAD_USERS)
+    store.dispatch(USERS_EVENTS.LOAD)
 
     return {
       users: {
@@ -34,7 +30,7 @@ export const users: StoreonModule<State, Events> = (store) => {
     }
   })
 
-  store.on(LOAD_USERS, async ({ auth }) => {
+  store.on(USERS_EVENTS.LOAD, async ({ auth }) => {
     try {
       const users = await request(`${API_URL}/users`, {
         headers: {
@@ -43,13 +39,13 @@ export const users: StoreonModule<State, Events> = (store) => {
         },
       })
 
-      store.dispatch(LOAD_USERS_SUCCESS, users || [])
+      store.dispatch(USERS_EVENTS.LOAD_SUCCESS, users || [])
     } catch (error) {
-      store.dispatch(LOAD_USERS_ERROR, error)
+      store.dispatch(USERS_EVENTS.LOAD_ERROR, error)
     }
   })
 
-  store.on(LOAD_USERS_SUCCESS, ({ users }, data) => {
+  store.on(USERS_EVENTS.LOAD_SUCCESS, ({ users }, data) => {
     return {
       users: {
         ...users,
@@ -59,7 +55,7 @@ export const users: StoreonModule<State, Events> = (store) => {
     }
   })
 
-  store.on(LOAD_USERS_ERROR, ({ users }, error) => {
+  store.on(USERS_EVENTS.LOAD_ERROR, ({ users }, error) => {
     if (__DEV__) console.log(error)
 
     return {
@@ -71,7 +67,7 @@ export const users: StoreonModule<State, Events> = (store) => {
   })
 
   // add a single user to the state
-  store.on(NEW_USER_EVENT, ({ users }, { user }) => {
+  store.on(USERS_EVENTS.NEW_USER, ({ users }, { user }) => {
     return {
       users: {
         ...users,

@@ -1,17 +1,10 @@
 import { StoreonModule } from 'storeon'
 import { State, Events } from 'store/types'
-import { LOGIN_SUCCESS } from 'store/auth'
+import { AUTH_EVENTS } from 'store/auth/events'
 import { request } from 'util/request'
 import { API_URL } from '@env'
 import { Platform } from 'react-native'
-
-export const LOAD_BEERS = 'beers/LOAD_BEERS'
-export const LOAD_BEERS_SUCCESS = 'beers/LOAD_BEERS_SUCCESS'
-export const LOAD_BEERS_ERROR = 'beers/LOAD_BEERS_ERROR'
-export const GIVE_BEERS = 'beers/GIVE_BEERS'
-export const GIVE_BEERS_SUCCESS = 'beers/GIVE_BEERS_SUCCESS'
-export const GIVE_BEERS_ERROR = 'beers/GIVE_BEERS_ERROR'
-export const BEER_LOG_EVENT = 'beers/BEER_LOG_EVENT'
+import { BEER_EVENTS } from './events'
 
 export const beers: StoreonModule<State, Events> = (store) => {
   store.on('@init', () => {
@@ -26,10 +19,10 @@ export const beers: StoreonModule<State, Events> = (store) => {
   })
 
   // load the beer data after login
-  store.on(LOGIN_SUCCESS, ({ beers }, { token }) => {
+  store.on(AUTH_EVENTS.LOGIN_SUCCESS, ({ beers }, { token }) => {
     if (!token) return
 
-    store.dispatch(LOAD_BEERS)
+    store.dispatch(BEER_EVENTS.LOAD)
 
     return {
       beers: {
@@ -39,7 +32,7 @@ export const beers: StoreonModule<State, Events> = (store) => {
     }
   })
 
-  store.on(LOAD_BEERS, async ({ auth }) => {
+  store.on(BEER_EVENTS.LOAD, async ({ auth }) => {
     try {
       if (!auth.user) {
         throw new Error('user is missing')
@@ -59,17 +52,17 @@ export const beers: StoreonModule<State, Events> = (store) => {
         },
       })
 
-      store.dispatch(LOAD_BEERS_SUCCESS, {
+      store.dispatch(BEER_EVENTS.LOAD_SUCCESS, {
         beerLog: beerLog || [],
         given: given || 0,
         received: received || 0,
       })
     } catch (error) {
-      store.dispatch(LOAD_BEERS_ERROR, error)
+      store.dispatch(BEER_EVENTS.LOAD_ERROR, error)
     }
   })
 
-  store.on(LOAD_BEERS_SUCCESS, ({ beers }, { beerLog, given, received }) => {
+  store.on(BEER_EVENTS.LOAD_SUCCESS, ({ beers }, { beerLog, given, received }) => {
     return {
       beers: {
         ...beers,
@@ -81,7 +74,7 @@ export const beers: StoreonModule<State, Events> = (store) => {
     }
   })
 
-  store.on(LOAD_BEERS_ERROR, ({ beers }, error) => {
+  store.on(BEER_EVENTS.LOAD_ERROR, ({ beers }, error) => {
     if (__DEV__) console.log(error)
 
     return {
@@ -92,7 +85,7 @@ export const beers: StoreonModule<State, Events> = (store) => {
     }
   })
 
-  store.on(GIVE_BEERS, async ({ auth }, { id, amount }) => {
+  store.on(BEER_EVENTS.GIVE, async ({ auth }, { id, amount }) => {
     try {
       if (!auth.user) {
         throw new Error('user is missing')
@@ -106,13 +99,13 @@ export const beers: StoreonModule<State, Events> = (store) => {
         },
       })
 
-      store.dispatch(GIVE_BEERS_SUCCESS, { amount })
+      store.dispatch(BEER_EVENTS.GIVE_SUCCESS, { amount })
     } catch (error) {
-      store.dispatch(GIVE_BEERS_ERROR, error)
+      store.dispatch(BEER_EVENTS.GIVE_ERROR, error)
     }
   })
 
-  store.on(GIVE_BEERS_SUCCESS, ({ beers }, { amount }) => {
+  store.on(BEER_EVENTS.GIVE_SUCCESS, ({ beers }, { amount }) => {
     return {
       beers: {
         ...beers,
@@ -122,7 +115,7 @@ export const beers: StoreonModule<State, Events> = (store) => {
   })
 
   // add a single log to the state
-  store.on(BEER_LOG_EVENT, ({ beers, auth }, { beer }) => {
+  store.on(BEER_EVENTS.NEW_LOG, ({ beers, auth }, { beer }) => {
     const topLog = beers.beerLog[0]
     let newLog = [beer].concat(beers.beerLog)
 

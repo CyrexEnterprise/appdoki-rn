@@ -1,6 +1,6 @@
 import { User } from 'store/auth/types'
 import { ErrorReason } from 'util/request'
-import { LOAD_USERS, LOAD_USERS_ERROR, LOAD_USERS_SUCCESS, NEW_USER_EVENT } from '.'
+import { USERS_EVENTS } from './events'
 
 export interface UsersStore {
   loading: boolean,
@@ -8,8 +8,8 @@ export interface UsersStore {
 }
 
 export type UsersEvents = {
-  [LOAD_USERS]: undefined,
-  [LOAD_USERS_SUCCESS]: User[],
-  [LOAD_USERS_ERROR]: ErrorReason,
-  [NEW_USER_EVENT]: { user: User },
+  [USERS_EVENTS.LOAD]: undefined,
+  [USERS_EVENTS.LOAD_SUCCESS]: User[],
+  [USERS_EVENTS.LOAD_ERROR]: ErrorReason,
+  [USERS_EVENTS.NEW_USER]: { user: User },
 }

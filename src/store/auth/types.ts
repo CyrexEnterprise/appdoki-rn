@@ -1,4 +1,4 @@
-import { AUTH_WORK, LOGIN, LOGIN_SUCCESS, LOGOUT } from '.'
+import { AUTH_EVENTS } from './events'
 
 export interface AuthStore {
   loading: boolean,
@@ -14,8 +14,8 @@ export type User = {
 }
 
 export type AuthEvents = {
-  [AUTH_WORK]: undefined,
-  [LOGIN]: undefined,
-  [LOGIN_SUCCESS]: { token: string | null; user?: User },
-  [LOGOUT]: undefined,
+  [AUTH_EVENTS.AUTH_WORK]: undefined,
+  [AUTH_EVENTS.LOGIN]: undefined,
+  [AUTH_EVENTS.LOGIN_SUCCESS]: { token: string | null; user?: User },
+  [AUTH_EVENTS.LOGOUT]: undefined,
 }

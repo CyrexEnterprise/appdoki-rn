@@ -1,4 +1,4 @@
-import { LOAD_PREFERENCES, TOGGLE_THEME } from '.'
+import { PREFERENCES_EVENTS } from './events'
 
 export type ThemeType = 'light' | 'dark'
 
@@ -7,6 +7,6 @@ export interface PreferencesStore {
 }
 
 export type PreferencesEvents = {
-  [LOAD_PREFERENCES]: { themeType: ThemeType },
-  [TOGGLE_THEME]: undefined,
+  [PREFERENCES_EVENTS.LOAD]: { themeType: ThemeType },
+  [PREFERENCES_EVENTS.TOGGLE_THEME]: undefined,
 }

@@ -1,18 +1,14 @@
 import messaging from '@react-native-firebase/messaging'
 import { StoreonModule } from 'storeon'
-import { State, Events } from 'store/types'
 import { Platform } from 'react-native'
 import { API_URL } from '@env'
 import { GoogleSignin, statusCodes, User as GUser } from '@react-native-community/google-signin'
+import { State, Events } from 'store/types'
 import { request } from 'util/request'
 
+import { AUTH_EVENTS } from './events'
 import { onDeletedMessages, onMessage, requestUserNotificationsPermission, subscribeToTopics, unsubscribeFromTopics } from './helpers'
 import { User } from './types'
-
-export const AUTH_WORK = 'auth/AUTH_WORK'
-export const LOGIN = 'auth/LOGIN'
-export const LOGIN_SUCCESS = 'auth/LOGIN_SUCCESS'
-export const LOGOUT = 'auth/LOGOUT'
 
 export const auth: StoreonModule<State, Events> = (store) => {
   let unsubMessageListener = () => {}
@@ -53,10 +49,10 @@ export const auth: StoreonModule<State, Events> = (store) => {
       }
     }
 
-    store.dispatch(LOGIN_SUCCESS, { token: gUser?.idToken || null, user })
+    store.dispatch(AUTH_EVENTS.LOGIN_SUCCESS, { token: gUser?.idToken || null, user })
   })
 
-  store.on(AUTH_WORK, ({ auth }) => {
+  store.on(AUTH_EVENTS.AUTH_WORK, ({ auth }) => {
     return {
       auth: {
         ...auth,
@@ -66,9 +62,9 @@ export const auth: StoreonModule<State, Events> = (store) => {
   })
 
   // get access token from google and user data from the api
-  store.on(LOGIN, async () => {
+  store.on(AUTH_EVENTS.LOGIN, async () => {
     try {
-      store.dispatch(AUTH_WORK)
+      store.dispatch(AUTH_EVENTS.AUTH_WORK)
 
       await GoogleSignin.hasPlayServices()
       const { idToken } = await GoogleSignin.signIn()
@@ -80,7 +76,7 @@ export const auth: StoreonModule<State, Events> = (store) => {
         },
       })
 
-      store.dispatch(LOGIN_SUCCESS, { token: idToken, user })
+      store.dispatch(AUTH_EVENTS.LOGIN_SUCCESS, { token: idToken, user })
     } catch (error) {
       // TODO: treat this errors
       switch (error.code) {
@@ -100,8 +96,8 @@ export const auth: StoreonModule<State, Events> = (store) => {
   })
 
   // set the user and token
-  store.on(LOGIN_SUCCESS, ({ auth }, { token, user }) => {
-    store.dispatch(AUTH_WORK)
+  store.on(AUTH_EVENTS.LOGIN_SUCCESS, ({ auth }, { token, user }) => {
+    store.dispatch(AUTH_EVENTS.AUTH_WORK)
 
     return {
       auth: {
@@ -114,7 +110,7 @@ export const auth: StoreonModule<State, Events> = (store) => {
   })
 
   // ask for messaging permissions and subscribe to fcm messages and topics
-  store.on(LOGIN_SUCCESS, async () => {
+  store.on(AUTH_EVENTS.LOGIN_SUCCESS, async () => {
     const enabled = await requestUserNotificationsPermission()
 
     if (enabled) {
@@ -131,7 +127,7 @@ export const auth: StoreonModule<State, Events> = (store) => {
   })
 
   // Revoke token and unsubscribe from messages and topics
-  store.on(LOGOUT, async () => {
+  store.on(AUTH_EVENTS.LOGOUT, async () => {
     try {
       unsubMessageListener()
       unsubDeletedMessagesListener()
@@ -145,7 +141,7 @@ export const auth: StoreonModule<State, Events> = (store) => {
   })
 
   // Reset the state
-  store.on(LOGOUT, () => {
+  store.on(AUTH_EVENTS.LOGOUT, () => {
     return {
       auth: {
         token: null,

@@ -1,9 +1,9 @@
 import messaging, { FirebaseMessagingTypes } from '@react-native-firebase/messaging'
 import { StoreonStore } from 'storeon'
-import { State, Events } from 'store/types'
-import { BEER_LOG_EVENT, LOAD_BEERS } from 'store/beers'
-import { LOAD_USERS, NEW_USER_EVENT } from 'store/users'
 import { store } from 'store'
+import { State, Events } from 'store/types'
+import { BEER_EVENTS } from 'store/beers/events'
+import { USERS_EVENTS } from 'store/users/events'
 
 export enum FCM_TOPICS {
   beers = 'beers',
@@ -23,7 +23,7 @@ export function onMessage (message: FirebaseMessagingTypes.RemoteMessage) {
 
   // FIXME: we should have a property in the data payload to distinguish the message event in the future
   if (message.data?.hasOwnProperty('beers')) {
-    store.dispatch(BEER_LOG_EVENT, {
+    store.dispatch(BEER_EVENTS.NEW_LOG, {
       beer: {
         beers: Number(message.data.beers),
         givenAt: message.data.givenAt,
@@ -34,7 +34,7 @@ export function onMessage (message: FirebaseMessagingTypes.RemoteMessage) {
   }
 
   if (message.data?.hasOwnProperty('user')) {
-    store.dispatch(NEW_USER_EVENT, {
+    store.dispatch(USERS_EVENTS.NEW_USER, {
       user: JSON.parse(message.data.user),
     })
   }
@@ -42,8 +42,8 @@ export function onMessage (message: FirebaseMessagingTypes.RemoteMessage) {
 
 export function onDeletedMessages (store: StoreonStore<State, Events>) {
   // request fresh new data
-  store.dispatch(LOAD_BEERS)
-  store.dispatch(LOAD_USERS)
+  store.dispatch(BEER_EVENTS.LOAD)
+  store.dispatch(USERS_EVENTS.LOAD)
 }
 
 export async function subscribeToTopics () {
