@@ -13,7 +13,7 @@ import { Icon } from 'components/Icon'
 import styles from './styles'
 import { GiveBeerScreenProps } from './types'
 
-export const GiveBeer: React.FC<GiveBeerScreenProps> = ({ route, navigation }) => {
+export const GiveBeerScreen: React.FC<GiveBeerScreenProps> = ({ route, navigation }) => {
   // if you know portuguese I hope it made you smile :)
   // else this means a pack of 24 if the context is beers
   const UMA_GRADE = 24

@@ -10,8 +10,8 @@ import { Events, State } from 'store/types'
 import LogoSrc from 'assets/logo.png'
 import { BottomNavigator } from 'routes/BottomNavigator'
 import { AppTitleContainer } from 'components/AppTitleContainer'
-import { GiveBeerList } from 'screens/GiveBeerList'
-import { GiveBeer } from 'screens/GiveBeer'
+import { GiveBeerListScreen } from 'screens/GiveBeerList'
+import { GiveBeerScreen } from 'screens/GiveBeer'
 
 import styles from './styles'
 import { MainNavigatorParamsList } from './types'
@@ -85,7 +85,7 @@ export const MainNavigator = () => {
 
       <Stack.Screen
         name='GiveBeerList'
-        component={GiveBeerList}
+        component={GiveBeerListScreen}
         options={{
           headerTitle: 'Beer Giver',
           gestureEnabled: true,
@@ -95,7 +95,7 @@ export const MainNavigator = () => {
 
       <Stack.Screen
         name='GiveBeer'
-        component={GiveBeer}
+        component={GiveBeerScreen}
         options={{
           header: () => null,
           gestureEnabled: true,

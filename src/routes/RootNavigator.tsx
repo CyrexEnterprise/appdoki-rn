@@ -2,7 +2,7 @@ import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
 import { useStoreon } from 'storeon/react'
 import { Events, State } from 'store/types'
-import { Login } from 'screens/Login'
+import { LoginScreen } from 'screens/Login'
 
 import { DrawerNavigator } from './DrawerNavigator'
 
@@ -14,7 +14,7 @@ export const RootNavigator = () => {
   return (
     <Stack.Navigator headerMode='none'>
       {auth.token == null ? (
-        <Stack.Screen name='Login' component={Login} />
+        <Stack.Screen name='Login' component={LoginScreen} />
       ) : (
         <Stack.Screen name='Root' component={DrawerNavigator} />
       )}

@@ -11,7 +11,7 @@ import { useStoreon } from 'storeon/react'
 import styles from './styles'
 import { FeedScreenProps } from './types'
 
-export const Feed: React.FC<FeedScreenProps> = () => {
+export const FeedScreen: React.FC<FeedScreenProps> = () => {
   const { colors } = useTheme() as AppTheme
   const { beers } = useStoreon<State, Events>('beers')
 

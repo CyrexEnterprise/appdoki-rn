@@ -4,7 +4,7 @@ import { View } from 'react-native'
 import { Paragraph, useTheme } from 'react-native-paper'
 import styles from './styles'
 
-export const Notifications: React.FC = () => {
+export const NotificationsScreen: React.FC = () => {
   const theme = useTheme() as AppTheme
   return (
     <View style={styles.root}>

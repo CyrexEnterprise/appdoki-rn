@@ -11,7 +11,7 @@ import { useStoreon } from 'storeon/react'
 import styles from './styles'
 import { GiveBeerListScreenProps } from './types'
 
-export const GiveBeerList: React.FC<GiveBeerListScreenProps> = ({ navigation }) => {
+export const GiveBeerListScreen: React.FC<GiveBeerListScreenProps> = ({ navigation }) => {
   const { colors } = useTheme() as AppTheme
   const { users, auth } = useStoreon<State, Events>('users', 'auth')
 
