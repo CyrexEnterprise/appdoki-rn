@@ -5,5 +5,5 @@ export interface SlideProps extends ViewProps {
   show: boolean,
   /** initial offset */
   initialOffset?: number,
-  inverted: boolean,
+  inverted?: boolean,
 }
