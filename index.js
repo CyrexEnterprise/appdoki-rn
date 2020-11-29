@@ -1,12 +1,19 @@
 import 'react-native-gesture-handler'
 import React from 'react'
 import messaging from '@react-native-firebase/messaging'
-import { AppRegistry } from 'react-native'
+import { AppRegistry, LogBox } from 'react-native'
 import { App } from './src/App'
 import { name as appName } from './app.json'
 import { onMessage } from 'store/auth/helpers'
 
 if (__DEV__) {
+  LogBox.ignoreLogs([
+    // This warning occurs because we pass callbacks in some route navigations i.e. Dialog
+    // and because fuctions are not serializable, just remember taht state persistance and deep-linking
+    // features became unavailable for those screens
+    'Non-serializable values were found in the navigation state',
+  ])
+
   import('./src/util/reactotronConfig').then(() => console.log('Reactotron Configured'))
 }
 

@@ -32,6 +32,9 @@ PODS:
   - Firebase/Performance (7.1.0):
     - Firebase/CoreOnly
     - FirebasePerformance (~> 7.1.0)
+  - Firebase/RemoteConfig (7.1.0):
+    - Firebase/CoreOnly
+    - FirebaseRemoteConfig (~> 7.1.0)
   - FirebaseABTesting (7.1.0):
     - FirebaseCore (~> 7.0)
   - FirebaseAnalytics (7.1.0):
@@ -461,6 +464,10 @@ PODS:
     - Firebase/Performance (~> 7.1.0)
     - React-Core
     - RNFBApp
+  - RNFBRemoteConfig (10.1.0):
+    - Firebase/RemoteConfig (~> 7.1.0)
+    - React-Core
+    - RNFBApp
   - RNGestureHandler (1.8.0):
     - React
   - RNGoogleSignin (5.0.0):
@@ -537,6 +544,7 @@ DEPENDENCIES:
   - "RNFBCrashlytics (from `../node_modules/@react-native-firebase/crashlytics`)"
   - "RNFBMessaging (from `../node_modules/@react-native-firebase/messaging`)"
   - "RNFBPerf (from `../node_modules/@react-native-firebase/perf`)"
+  - "RNFBRemoteConfig (from `../node_modules/@react-native-firebase/remote-config`)"
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - "RNGoogleSignin (from `../node_modules/@react-native-community/google-signin`)"
   - RNReanimated (from `../node_modules/react-native-reanimated`)
@@ -654,6 +662,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-firebase/messaging"
   RNFBPerf:
     :path: "../node_modules/@react-native-firebase/perf"
+  RNFBRemoteConfig:
+    :path: "../node_modules/@react-native-firebase/remote-config"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
   RNGoogleSignin:
@@ -740,6 +750,7 @@ SPEC CHECKSUMS:
   RNFBCrashlytics: 2ff8548152020b4eeba1963f60bb5e35c3dcfc44
   RNFBMessaging: 483093ab71fb3de1d5b410fbf8ecdd32b84b5f78
   RNFBPerf: 5046f7267fabf9cd4bd55b6aad47b3480bc66ad7
+  RNFBRemoteConfig: 5d00d02901bbe4524485235826b0a9d46e028b23
   RNGestureHandler: 7a5833d0f788dbd107fbb913e09aa0c1ff333c39
   RNGoogleSignin: ad866d4c4af2651e36801dd3b7771d7715353499
   RNReanimated: e03f7425cb7a38dcf1b644d680d1bfc91c3337ad
