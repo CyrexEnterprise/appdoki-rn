@@ -138,6 +138,7 @@ android {
         applicationId "com.cloudoki.appdoki"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
+        // BEGIN VERSIONS
         versionCode 3
         versionName "1.0.0-alpha.2"
         multiDexEnabled true

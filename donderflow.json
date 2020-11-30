@@ -1,0 +1,4 @@
+{
+  "allowBranch": ["master"],
+  "bumpFilesFunc": "scripts/bumpFiles"
+}
