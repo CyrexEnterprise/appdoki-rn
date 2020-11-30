@@ -28,6 +28,7 @@
     "index.js",
     "metro.config.js",
     "babel.config.js",
+    "scripts/bumpfiles.js",
 		"src/**/*"
 	],
   "exclude": [
