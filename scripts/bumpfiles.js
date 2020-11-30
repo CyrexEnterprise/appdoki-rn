@@ -90,10 +90,13 @@ async function bumpAndroid (config) {
 
   const versionCodeText = body[versionCodeLine]
   const versionCode = Number(versionCodeText.substring(versionCodeText.lastIndexOf(' '), versionCodeText.length))
+
+  // Incremental version
   body[versionCodeLine] = body[versionCodeLine].replace(versionCode, versionCode + 1)
 
   const versionNameText = body[versionNameLine]
   const versionName = versionNameText.substring(versionNameText.lastIndexOf(' '), versionNameText.length)
+
   body[versionNameLine] = body[versionNameLine].replace(versionName, ` "${config.version}"`)
 
   const output = body.join('\n')
