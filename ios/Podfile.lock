@@ -197,6 +197,10 @@ PODS:
   - GTMSessionFetcher/Core (1.5.0)
   - GTMSessionFetcher/Full (1.5.0):
     - GTMSessionFetcher/Core (= 1.5.0)
+  - lottie-ios (3.1.8)
+  - lottie-react-native (3.5.0):
+    - lottie-ios (~> 3.1.8)
+    - React
   - nanopb (2.30906.0):
     - nanopb/decode (= 2.30906.0)
     - nanopb/encode (= 2.30906.0)
@@ -456,7 +460,7 @@ PODS:
     - Firebase/Crashlytics (~> 7.1.0)
     - React-Core
     - RNFBApp
-  - RNFBMessaging (10.1.0):
+  - RNFBMessaging (10.0.0):
     - Firebase/Messaging (~> 7.1.0)
     - React-Core
     - RNFBApp
@@ -464,7 +468,7 @@ PODS:
     - Firebase/Performance (~> 7.1.0)
     - React-Core
     - RNFBApp
-  - RNFBRemoteConfig (10.1.0):
+  - RNFBRemoteConfig (10.0.0):
     - Firebase/RemoteConfig (~> 7.1.0)
     - React-Core
     - RNFBApp
@@ -512,6 +516,8 @@ DEPENDENCIES:
   - FlipperKit/SKIOSNetworkPlugin (~> 0.54.0)
   - Folly (from `../node_modules/react-native/third-party-podspecs/Folly.podspec`)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
+  - lottie-ios (from `../node_modules/lottie-ios`)
+  - lottie-react-native (from `../node_modules/lottie-react-native`)
   - RCTRequired (from `../node_modules/react-native/Libraries/RCTRequired`)
   - RCTTypeSafety (from `../node_modules/react-native/Libraries/TypeSafety`)
   - React (from `../node_modules/react-native/`)
@@ -602,6 +608,10 @@ EXTERNAL SOURCES:
     :podspec: "../node_modules/react-native/third-party-podspecs/Folly.podspec"
   glog:
     :podspec: "../node_modules/react-native/third-party-podspecs/glog.podspec"
+  lottie-ios:
+    :path: "../node_modules/lottie-ios"
+  lottie-react-native:
+    :path: "../node_modules/lottie-react-native"
   RCTRequired:
     :path: "../node_modules/react-native/Libraries/RCTRequired"
   RCTTypeSafety:
@@ -716,6 +726,8 @@ SPEC CHECKSUMS:
   GoogleUtilities: 3dc4ff0d5e4840e2fa8eef0889620e8c33d4218c
   GTMAppAuth: 197a8dabfea5d665224aa00d17f164fc2248dab9
   GTMSessionFetcher: b3503b20a988c4e20cc189aa798fd18220133f52
+  lottie-ios: 48fac6be217c76937e36e340e2d09cf7b10b7f5f
+  lottie-react-native: 1fb4ce21d6ad37dab8343eaff8719df76035bd93
   nanopb: 1bf24dd71191072e120b83dd02d08f3da0d65e53
   OpenSSL-Universal: ff34003318d5e1163e9529b08470708e389ffcdd
   PromisesObjC: 8c196f5a328c2cba3e74624585467a557dcb482f
@@ -748,9 +760,9 @@ SPEC CHECKSUMS:
   RNFBAnalytics: 56ceefdcff33238b7817d164ebabb4863a3fed92
   RNFBApp: dd793eec42bce8d09391bd95e42f2ed7511e7fef
   RNFBCrashlytics: 2ff8548152020b4eeba1963f60bb5e35c3dcfc44
-  RNFBMessaging: 483093ab71fb3de1d5b410fbf8ecdd32b84b5f78
+  RNFBMessaging: b61a2478fd3fb05bd2f72f18ad194cfb93e682f2
   RNFBPerf: 5046f7267fabf9cd4bd55b6aad47b3480bc66ad7
-  RNFBRemoteConfig: 5d00d02901bbe4524485235826b0a9d46e028b23
+  RNFBRemoteConfig: 71be209e53a61ddade095fbae42b723d4f65e0a7
   RNGestureHandler: 7a5833d0f788dbd107fbb913e09aa0c1ff333c39
   RNGoogleSignin: ad866d4c4af2651e36801dd3b7771d7715353499
   RNReanimated: e03f7425cb7a38dcf1b644d680d1bfc91c3337ad

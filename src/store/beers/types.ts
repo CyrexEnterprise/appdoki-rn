@@ -12,6 +12,9 @@ export type BeersEvents = {
   [BEER_EVENTS.LOAD]: undefined,
   [BEER_EVENTS.LOAD_SUCCESS]: { beerLog: Beer[]; given: number; received: number },
   [BEER_EVENTS.LOAD_ERROR]: ErrorReason,
+  [BEER_EVENTS.LOAD_MORE]: undefined,
+  [BEER_EVENTS.LOAD_MORE_SUCCESS]: { beers: Beer[] },
+  [BEER_EVENTS.LOAD_MORE_ERROR]: ErrorReason,
   [BEER_EVENTS.GIVE]: { id: string; amount: number },
   [BEER_EVENTS.GIVE_SUCCESS]: { amount: number },
   [BEER_EVENTS.GIVE_ERROR]: ErrorReason,
@@ -19,6 +22,7 @@ export type BeersEvents = {
 }
 
 export type Beer = {
+  id: number,
   beers: number,
   giver: {
     id: string,
