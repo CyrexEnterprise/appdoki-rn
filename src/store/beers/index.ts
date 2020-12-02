@@ -6,7 +6,7 @@ import { API_URL } from '@env'
 import { Platform } from 'react-native'
 import { BEER_EVENTS } from './events'
 
-const PAGINATION_LIMIT = 20
+const PAGINATION_LIMIT = 50
 
 export const beers: StoreonModule<State, Events> = (store) => {
   store.on('@init', () => {
@@ -75,6 +75,63 @@ export const beers: StoreonModule<State, Events> = (store) => {
         beerLog: beerLog,
         given,
         received,
+        loading: false,
+      },
+    }
+  })
+
+  store.on(BEER_EVENTS.LOAD_ERROR, ({ beers }, error) => {
+    if (__DEV__) console.log(error)
+
+    return {
+      beers: {
+        ...beers,
+        loading: false,
+      },
+    }
+  })
+
+  store.on(BEER_EVENTS.LOAD_MORE, ({ beers }) => {
+    return {
+      beers: {
+        ...beers,
+        loading: true,
+      },
+    }
+  })
+
+  store.on(BEER_EVENTS.LOAD_MORE, async ({ auth, beers }) => {
+    try {
+      if (!auth.user) {
+        throw new Error('user is missing')
+      }
+
+      if (!beers.beerLog.length) {
+        throw new Error('beer log is empty can\'t load more')
+      }
+
+      const lastGivenAt = beers.beerLog[beers.beerLog.length - 1].givenAt
+
+      const beerLog = await request(`${API_URL}/beers?limit=${PAGINATION_LIMIT}&op=lt&givenAt=${lastGivenAt}`, {
+        headers: {
+          platform: Platform.OS,
+          Authorization: `Bearer ${auth.token}`,
+        },
+      })
+
+      store.dispatch(BEER_EVENTS.LOAD_MORE_SUCCESS, {
+        beers: beerLog || [],
+      })
+    } catch (error) {
+      store.dispatch(BEER_EVENTS.LOAD_MORE_ERROR, error)
+    }
+  })
+
+  store.on(BEER_EVENTS.LOAD_MORE_SUCCESS, ({ beers }, data) => {
+    return {
+      beers: {
+        ...beers,
+        beerLog: [...beers.beerLog, ...data.beers],
         loading: false,
       },
     }

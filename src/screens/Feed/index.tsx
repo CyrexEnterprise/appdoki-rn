@@ -82,6 +82,8 @@ export const FeedScreen: React.FC<FeedScreenProps> = () => {
         showsHorizontalScrollIndicator={false}
         renderItem={renderItem}
         ListFooterComponent={renderFooter}
+        onEndReachedThreshold={0.3}
+        onEndReached={() => dispatch(BEER_EVENTS.LOAD_MORE)}
         refreshControl={
           <RefreshControl
             colors={[colors.primary]}
