@@ -137,7 +137,7 @@ export const beers: StoreonModule<State, Events> = (store) => {
     }
   })
 
-  store.on(BEER_EVENTS.LOAD_ERROR, ({ beers }, error) => {
+  store.on(BEER_EVENTS.LOAD_MORE_ERROR, ({ beers }, error) => {
     if (__DEV__) console.log(error)
 
     return {
