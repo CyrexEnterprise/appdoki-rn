@@ -25,4 +25,11 @@ export default StyleSheet.create({
     alignItems: 'center',
     height: 100,
   },
+  lottieViewTop: {
+    height: 90,
+    alignSelf: 'center',
+  },
+  lottieViewBottom: {
+    height: 50,
+  },
 })

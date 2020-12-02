@@ -6,6 +6,8 @@ import { API_URL } from '@env'
 import { Platform } from 'react-native'
 import { BEER_EVENTS } from './events'
 
+const PAGINATION_LIMIT = 20
+
 export const beers: StoreonModule<State, Events> = (store) => {
   store.on('@init', () => {
     return {
@@ -19,11 +21,13 @@ export const beers: StoreonModule<State, Events> = (store) => {
   })
 
   // load the beer data after login
-  store.on(AUTH_EVENTS.LOGIN_SUCCESS, ({ beers }, { token }) => {
+  store.on(AUTH_EVENTS.LOGIN_SUCCESS, (_, { token }) => {
     if (!token) return
 
     store.dispatch(BEER_EVENTS.LOAD)
+  })
 
+  store.on(BEER_EVENTS.LOAD, ({ beers }) => {
     return {
       beers: {
         ...beers,
@@ -38,7 +42,9 @@ export const beers: StoreonModule<State, Events> = (store) => {
         throw new Error('user is missing')
       }
 
-      const beerLog = await request(`${API_URL}/beers`, {
+      const todayISO = (new Date()).toISOString()
+
+      const beerLog = await request(`${API_URL}/beers?limit=${PAGINATION_LIMIT}&op=lt&givenAt=${todayISO}`, {
         headers: {
           platform: Platform.OS,
           Authorization: `Bearer ${auth.token}`,

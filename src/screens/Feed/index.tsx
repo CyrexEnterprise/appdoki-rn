@@ -1,19 +1,21 @@
-import { Icon } from 'components/Icon'
-import { AppTheme } from 'constants/theme'
 import React from 'react'
-import { ListRenderItem, View } from 'react-native'
-import { FlatList } from 'react-native-gesture-handler'
+import { FlatList, ListRenderItem, RefreshControl, StyleSheet, View } from 'react-native'
 import { Avatar, Paragraph, Text, Title, useTheme } from 'react-native-paper'
+import LottieView from 'lottie-react-native'
+import { AppTheme } from 'constants/theme'
+import { BEER_EVENTS } from 'store/beers/events'
 import { Beer } from 'store/beers/types'
 import { Events, State } from 'store/types'
 import { useStoreon } from 'storeon/react'
+import { Icon } from 'components/Icon'
 
 import styles from './styles'
 import { FeedScreenProps } from './types'
+import { Fade } from 'components/Animations'
 
 export const FeedScreen: React.FC<FeedScreenProps> = () => {
   const { colors } = useTheme() as AppTheme
-  const { beers } = useStoreon<State, Events>('beers')
+  const { dispatch, beers } = useStoreon<State, Events>('beers')
 
   const keyExtractor = (item: Beer) => `${item.giver.id}-${item.givenAt}-${item.receiver.id}`
 
@@ -57,7 +59,15 @@ export const FeedScreen: React.FC<FeedScreenProps> = () => {
   const renderFooter: React.FC = () => {
     return (
       <View style={[styles.endOfList, { backgroundColor: colors.surface }]}>
-        <Text>That's it. Time for some beers?</Text>
+        {beers.loading
+          ? (
+            <LottieView
+              autoPlay
+              style={styles.lottieViewBottom}
+              source={require('assets/beer-animation.json')}
+            />
+          )
+          : <Text>That's it. Time for some beers?</Text>}
       </View>
     )
   }
@@ -72,7 +82,27 @@ export const FeedScreen: React.FC<FeedScreenProps> = () => {
         showsHorizontalScrollIndicator={false}
         renderItem={renderItem}
         ListFooterComponent={renderFooter}
+        refreshControl={
+          <RefreshControl
+            colors={[colors.primary]}
+            tintColor={colors.primary}
+            refreshing={false}
+            enabled={!beers.loading}
+            onRefresh={() => dispatch(BEER_EVENTS.LOAD)}
+          />
+        }
       />
+
+      {/* This animation will only appear if the we have a slow connection */}
+      <View style={StyleSheet.absoluteFill} pointerEvents='none'>
+        <Fade value={Number(beers.loading)}>
+          <LottieView
+            autoPlay
+            style={styles.lottieViewTop}
+            source={require('assets/beer-animation.json')}
+          />
+        </Fade>
+      </View>
     </View>
   )
 }
