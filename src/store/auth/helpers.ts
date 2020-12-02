@@ -25,6 +25,7 @@ export function onMessage (message: FirebaseMessagingTypes.RemoteMessage) {
   if (message.data?.hasOwnProperty('beers')) {
     store.dispatch(BEER_EVENTS.NEW_LOG, {
       beer: {
+        id: Number(message.data.id),
         beers: Number(message.data.beers),
         givenAt: message.data.givenAt,
         giver: JSON.parse(message.data.giver),

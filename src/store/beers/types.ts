@@ -22,6 +22,7 @@ export type BeersEvents = {
 }
 
 export type Beer = {
+  id: number,
   beers: number,
   giver: {
     id: string,

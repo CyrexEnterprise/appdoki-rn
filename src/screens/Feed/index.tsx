@@ -17,9 +17,9 @@ export const FeedScreen: React.FC<FeedScreenProps> = () => {
   const { colors } = useTheme() as AppTheme
   const { dispatch, beers } = useStoreon<State, Events>('beers')
 
-  const keyExtractor = (item: Beer) => `${item.giver.id}-${item.givenAt}-${item.receiver.id}`
+  const keyExtractor = (item: Beer) => `${item.id}`
 
-  const renderItem: ListRenderItem<Beer> = ({ item }) => {
+  const renderItem: ListRenderItem<Beer> = React.useCallback(({ item }) => {
     const giverFName = item.giver.name.split(' ')[0]
     const receiverFName = item.receiver.name.split(' ')[0]
     const giverPic = item.giver.picture
@@ -54,7 +54,7 @@ export const FeedScreen: React.FC<FeedScreenProps> = () => {
         </View>
       </View>
     )
-  }
+  }, [colors])
 
   const renderFooter: React.FC = () => {
     return (

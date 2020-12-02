@@ -180,7 +180,7 @@ export const beers: StoreonModule<State, Events> = (store) => {
   // add a single log to the state
   store.on(BEER_EVENTS.NEW_LOG, ({ beers, auth }, { beer }) => {
     const topLog = beers.beerLog[0]
-    let newLog = [beer].concat(beers.beerLog)
+    let newLog = [beer].concat(beers.beerLog.filter((item) => item.id !== beer.id))
 
     // sort the log in case the beer received is older than the last log we have
     if (topLog && topLog.givenAt > beer.givenAt) {
