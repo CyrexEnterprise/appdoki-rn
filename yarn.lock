@@ -1299,6 +1299,11 @@
     "@babel/runtime" "^7.7.2"
     regenerator-runtime "^0.13.3"
 
+"@notifee/react-native@1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@notifee/react-native/-/react-native-1.0.0.tgz#0bf8e3d005795abff2fa0facc40d827534377fad"
+  integrity sha512-fpN9iM5UWtPe0Og//IpoQ4TDjZwuSohjWt09SdQRERvxOQATtvfjKUC1unJ3XEUh/vx6gYJA2VSOOk6ZPAb1qw==
+
 "@react-native-async-storage/async-storage@1.13.2":
   version "1.13.2"
   resolved "https://registry.yarnpkg.com/@react-native-async-storage/async-storage/-/async-storage-1.13.2.tgz#649f78527f16cd5a87071a888219ef7a35ef5c79"

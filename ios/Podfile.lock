@@ -449,26 +449,26 @@ PODS:
     - React
   - RNCMaskedView (0.1.10):
     - React
-  - RNFBAnalytics (10.0.0):
+  - RNFBAnalytics (10.1.0):
     - Firebase/Analytics (~> 7.1.0)
     - React-Core
     - RNFBApp
-  - RNFBApp (10.0.0):
+  - RNFBApp (10.1.0):
     - Firebase/CoreOnly (~> 7.1.0)
     - React-Core
-  - RNFBCrashlytics (10.0.0):
+  - RNFBCrashlytics (10.1.0):
     - Firebase/Crashlytics (~> 7.1.0)
     - React-Core
     - RNFBApp
-  - RNFBMessaging (10.0.0):
+  - RNFBMessaging (10.1.0):
     - Firebase/Messaging (~> 7.1.0)
     - React-Core
     - RNFBApp
-  - RNFBPerf (10.0.0):
+  - RNFBPerf (10.1.0):
     - Firebase/Performance (~> 7.1.0)
     - React-Core
     - RNFBApp
-  - RNFBRemoteConfig (10.0.0):
+  - RNFBRemoteConfig (10.1.0):
     - Firebase/RemoteConfig (~> 7.1.0)
     - React-Core
     - RNFBApp
@@ -476,6 +476,8 @@ PODS:
     - React
   - RNGoogleSignin (5.0.0):
     - GoogleSignIn (~> 5.0.0)
+    - React-Core
+  - RNNotifee (1.0.0):
     - React-Core
   - RNReanimated (1.13.2):
     - React-Core
@@ -553,6 +555,7 @@ DEPENDENCIES:
   - "RNFBRemoteConfig (from `../node_modules/@react-native-firebase/remote-config`)"
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - "RNGoogleSignin (from `../node_modules/@react-native-community/google-signin`)"
+  - "RNNotifee (from `../node_modules/@notifee/react-native`)"
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - RNSharedElement (from `../node_modules/react-native-shared-element`)
@@ -678,6 +681,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-gesture-handler"
   RNGoogleSignin:
     :path: "../node_modules/@react-native-community/google-signin"
+  RNNotifee:
+    :path: "../node_modules/@notifee/react-native"
   RNReanimated:
     :path: "../node_modules/react-native-reanimated"
   RNScreens:
@@ -757,14 +762,15 @@ SPEC CHECKSUMS:
   RNBootSplash: bd2ddb39b37042a54d7050bd59067dfd78c680d8
   RNCAsyncStorage: 05bae7ecfab1cbd5441993f1ca098f7c3b3f8d0e
   RNCMaskedView: 5a8ec07677aa885546a0d98da336457e2bea557f
-  RNFBAnalytics: 56ceefdcff33238b7817d164ebabb4863a3fed92
-  RNFBApp: dd793eec42bce8d09391bd95e42f2ed7511e7fef
-  RNFBCrashlytics: 2ff8548152020b4eeba1963f60bb5e35c3dcfc44
-  RNFBMessaging: b61a2478fd3fb05bd2f72f18ad194cfb93e682f2
-  RNFBPerf: 5046f7267fabf9cd4bd55b6aad47b3480bc66ad7
-  RNFBRemoteConfig: 71be209e53a61ddade095fbae42b723d4f65e0a7
+  RNFBAnalytics: 0a98aff1ad9abee16de201012f03179246c2e5bb
+  RNFBApp: 2b4e07dfca4cf780b9e2d61bcc21e34d890cd654
+  RNFBCrashlytics: cf1600bf055aabd1fefb67220f151ea6092e1a2f
+  RNFBMessaging: 483093ab71fb3de1d5b410fbf8ecdd32b84b5f78
+  RNFBPerf: a0d50caf0d88079c6e9da1f674e7e6b2a9265585
+  RNFBRemoteConfig: 5d00d02901bbe4524485235826b0a9d46e028b23
   RNGestureHandler: 7a5833d0f788dbd107fbb913e09aa0c1ff333c39
   RNGoogleSignin: ad866d4c4af2651e36801dd3b7771d7715353499
+  RNNotifee: acd1d17e642c93d5d7bc4c2a1dcd4f9c348e5da9
   RNReanimated: e03f7425cb7a38dcf1b644d680d1bfc91c3337ad
   RNScreens: 2ad555d4d9fa10b91bb765ca07fe9b29d59573f0
   RNSharedElement: 00b1a1420d213a34459bb9a5aacabb38107d7948
@@ -775,4 +781,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 2183159c962340e8a533f34757ca5a9a8425c4f9
 
-COCOAPODS: 1.9.1
+COCOAPODS: 1.10.1
