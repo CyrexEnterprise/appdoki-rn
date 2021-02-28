@@ -16,6 +16,7 @@ jobs:
     - uses: actions/setup-node@v1
       with:
         node-version: '14.x'
-    - name: Publish Release
+    - name: Set git user
       run: git config --global user.name 'cloudoki-deploy'; git config --global user.email 'general@cloudoki.com'
+    - name: Publish Release
       run: npx @cloudoki/donderflow@1.0.0-alpha.5 --preid alpha
