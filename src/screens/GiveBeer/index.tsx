@@ -26,7 +26,7 @@ export const GiveBeerScreen: React.FC<GiveBeerScreenProps> = ({ route, navigatio
   const [complete, setComplete] = React.useState(false)
   const user = route.params
 
-  function handleBeerButtnoPress () {
+  function handleBeerButtonPress () {
     if (count < UMA_GRADE && !complete) {
       setCount(count + 1)
 
@@ -70,7 +70,7 @@ export const GiveBeerScreen: React.FC<GiveBeerScreenProps> = ({ route, navigatio
       <Text style={styles.beerNumber}>{count}</Text>
       <Subheading>Smash the beer button</Subheading>
 
-      <TouchableOpacity onPress={handleBeerButtnoPress} disabled={complete}>
+      <TouchableOpacity onPress={handleBeerButtonPress} disabled={complete}>
         <Surface style={[styles.beerButton, { backgroundColor: complete ? colors.accent : colors.amber }]}>
           <AnimatedCircularProgress
             size={150}

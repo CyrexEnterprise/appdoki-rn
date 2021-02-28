@@ -8,7 +8,7 @@ export const NotificationsScreen: React.FC = () => {
   const theme = useTheme() as AppTheme
   return (
     <View style={styles.root}>
-      <Paragraph>Notifications - <Paragraph style={{ color: theme.colors.amber }}>Comming Soon</Paragraph></Paragraph>
+      <Paragraph>Notifications - <Paragraph style={{ color: theme.colors.amber }}>Coming Soon</Paragraph></Paragraph>
     </View>
   )
 }

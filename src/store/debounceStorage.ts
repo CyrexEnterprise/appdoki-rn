@@ -5,7 +5,7 @@ import { State } from './types'
 // @ts-ignore
 const timers: Record<keyof State, NodeJS.Timeout> = {}
 
-export function debouceStorage<K extends keyof State> (key: K, state: State[K]) {
+export function debounceStorage<K extends keyof State> (key: K, state: State[K]) {
   clearTimeout(timers[key])
 
   timers[key] = setTimeout(async () => {

@@ -8,7 +8,7 @@ import { theme } from 'constants/theme'
 import { WEEKDAY } from 'constants/global'
 import { CLOCKIFY_REMINDER_PERIODICITY, PreferencesStore, ThemeType } from './types'
 import { PREFERENCES_EVENTS } from './events'
-import { debouceStorage } from 'store/debounceStorage'
+import { debounceStorage } from 'store/debounceStorage'
 import { upsertClockifyReminder } from './helpers/upsertClockifyReminder'
 
 const STORAGE_KEY = '@preferences'
@@ -46,7 +46,7 @@ export const preferences: StoreonModule<State, Events> = (store) => {
   })
 
   store.on(PREFERENCES_EVENTS.LOAD, (_, preferences) => {
-    updateSatusBar(preferences.themeType)
+    updateStatusBar(preferences.themeType)
 
     return {
       preferences,
@@ -57,9 +57,9 @@ export const preferences: StoreonModule<State, Events> = (store) => {
     const themeType = preferences.themeType === 'dark' ? 'light' : 'dark'
     const newPreferences: PreferencesStore = update(preferences, { themeType: { $set: themeType } })
 
-    debouceStorage('preferences', newPreferences)
+    debounceStorage('preferences', newPreferences)
 
-    updateSatusBar(themeType)
+    updateStatusBar(themeType)
 
     return {
       preferences: newPreferences,
@@ -69,7 +69,7 @@ export const preferences: StoreonModule<State, Events> = (store) => {
   store.on(PREFERENCES_EVENTS.UPDATE_CLOCKIFY, ({ preferences }, updates) => {
     const newPreferences = update(preferences, { clockify: { $merge: updates } })
 
-    debouceStorage('preferences', newPreferences)
+    debounceStorage('preferences', newPreferences)
 
     // schedule notification
     upsertClockifyReminder(newPreferences.clockify)
@@ -80,7 +80,7 @@ export const preferences: StoreonModule<State, Events> = (store) => {
   })
 }
 
-function updateSatusBar (themeType: ThemeType) {
+function updateStatusBar (themeType: ThemeType) {
   // if the app is not active this function call is useless and can cause problems
   if (AppState.currentState !== 'active') return
 

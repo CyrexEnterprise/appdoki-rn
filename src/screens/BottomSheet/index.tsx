@@ -37,13 +37,13 @@ export const BottomSheetScreen: React.FC<BottomSheetScreenProps> = ({ navigation
     }
   }, [bsRef, snapPoints])
 
-  // pop position in the navigation stack so the screen behind become interactable
+  // pop position in the navigation stack so the screen behind become interactive
   const handleOnCloseEnd = useCallback(() => {
     onClose && onClose()
     navigation.goBack()
   }, [navigation, onClose])
 
-  // Dismiss keyboard & andle backpress on android
+  // Dismiss keyboard & handle back press on android
   useFocusEffect(
     useCallback(() => {
       Keyboard.dismiss()
