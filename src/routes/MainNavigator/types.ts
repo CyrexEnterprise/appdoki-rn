@@ -11,4 +11,5 @@ export type MainNavigatorParamsList = {
     renderContent: (close: () => void) => React.ReactNode,
     renderHandle?: () => React.ReactNode,
   },
+  Preferences: undefined,
 }
