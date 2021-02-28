@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import { AppState, AppStateStatus } from 'react-native'
 import { GS_WEB_CLIENT_ID } from '@env'
-import { enableScreens } from 'react-native-screens'
+// import { enableScreens } from 'react-native-screens'
 import { GoogleSignin } from '@react-native-community/google-signin'
 import { FirebaseMessagingTypes } from '@react-native-firebase/messaging'
 import AsyncStorage from '@react-native-async-storage/async-storage'
@@ -14,7 +14,8 @@ import { onMessage } from 'store/auth/helpers'
 import { ThemeProvider } from 'components/ThemeProvider'
 import { RootNavigator } from 'routes/RootNavigator'
 
-enableScreens()
+// TODO: this was disabled because of degraded performance - investigate asap
+// enableScreens()
 
 GoogleSignin.configure({
   webClientId: GS_WEB_CLIENT_ID,
@@ -27,7 +28,7 @@ if (!__DEV__) {
 }
 
 export const App = () => {
-  const appState = React.useRef(AppState.currentState)
+  const appState = useRef(AppState.currentState)
 
   const handleAppStateChange = async (nextState: AppStateStatus) => {
     // fire all the messages that we stored when in background - see the root index.js
@@ -63,7 +64,7 @@ export const App = () => {
     appState.current = nextState
   }
 
-  React.useEffect(() => {
+  useEffect(() => {
     AppState.addEventListener('change', handleAppStateChange)
 
     return () => {
