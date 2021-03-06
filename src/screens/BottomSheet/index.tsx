@@ -21,7 +21,7 @@ export const BottomSheetScreen: React.FC<BottomSheetScreenProps> = ({ navigation
     ),
   )
   const bsRef = useRef<BottomSheet>(null)
-  const overlayOpacity = useRef(new Value(0))
+  const overlayOpacity = useRef(new Value(1))
 
   // Animate on open
   useEffect(() => {
