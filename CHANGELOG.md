@@ -1,5 +1,26 @@
 # Change Log
 
+<a name="v1.0.1-alpha.1"></a>
+## [v1.0.1-alpha.1](https://github.com/Cloudoki/appdoki-rn/compare/v1.0.1-alpha.0...v1.0.1-alpha.1)
+###### *Mar 23, 2021*
+
+### Bug Fixes
+
+* **BottomSheetScreen:** flash when opening ([5d779d4](https://github.com/Cloudoki/appdoki-rn/commit/5d779d4)), 
+
+### Features
+
+* **other:**
+  * BottomSheetScreen ([60ab774](https://github.com/Cloudoki/appdoki-rn/commit/60ab774)), 
+  * adds get next week day util ([72a2aad](https://github.com/Cloudoki/appdoki-rn/commit/72a2aad)), 
+  * adds Picker and TimePicker ([c036eac](https://github.com/Cloudoki/appdoki-rn/commit/c036eac)), 
+  * Preferences screen and Clockify reminder ([6dc8e17](https://github.com/Cloudoki/appdoki-rn/commit/6dc8e17)), 
+
+### Performance Improvements
+
+* **other:** disable RNScreens because of degraded performance ([fab4c7b](https://github.com/Cloudoki/appdoki-rn/commit/fab4c7b)),
+
+
 <a name="v1.0.1-alpha.0"></a>
 ## v1.0.1-alpha.0
 ###### *Dec 2, 2020*
