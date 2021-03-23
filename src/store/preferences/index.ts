@@ -3,14 +3,28 @@ import changeNavigationBarColor from 'react-native-navigation-bar-color'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { StoreonModule } from 'storeon'
 import { State, Events } from 'store/types'
+import update from 'immutability-helper'
 import { theme } from 'constants/theme'
-import { PreferencesStore, ThemeType } from './types'
+import { WEEKDAY } from 'constants/global'
+import { CLOCKIFY_REMINDER_PERIODICITY, PreferencesStore, ThemeType } from './types'
 import { PREFERENCES_EVENTS } from './events'
+import { debounceStorage } from 'store/debounceStorage'
+import { upsertClockifyReminder } from './helpers/upsertClockifyReminder'
 
 const STORAGE_KEY = '@preferences'
 
 export const preferences: StoreonModule<State, Events> = (store) => {
   store.on('@init', async () => {
+    const defaultState: PreferencesStore = {
+      themeType: 'light',
+      clockify: {
+        on: false,
+        periodicity: CLOCKIFY_REMINDER_PERIODICITY.weekly,
+        weekDay: WEEKDAY.friday,
+        time: '18:00',
+      },
+    }
+
     try {
       const jsonValue = await AsyncStorage.getItem(STORAGE_KEY)
 
@@ -18,18 +32,21 @@ export const preferences: StoreonModule<State, Events> = (store) => {
         throw new Error(`Invalid ${STORAGE_KEY} state after read`)
       }
 
-      store.dispatch(PREFERENCES_EVENTS.LOAD, JSON.parse(jsonValue))
+      // hydrate default state
+      // NOTE: we still need version management - this is just to prevent null pointers in `defaultState` changes
+      store.dispatch(PREFERENCES_EVENTS.LOAD, update(defaultState, { $merge: JSON.parse(jsonValue) }))
     } catch (error) {
       if (__DEV__) {
         console.log(error)
       }
 
-      store.dispatch(PREFERENCES_EVENTS.LOAD, { themeType: 'light' })
+      // default state
+      store.dispatch(PREFERENCES_EVENTS.LOAD, defaultState)
     }
   })
 
   store.on(PREFERENCES_EVENTS.LOAD, (_, preferences) => {
-    updateSatusBar(preferences.themeType)
+    updateStatusBar(preferences.themeType)
 
     return {
       preferences,
@@ -38,19 +55,24 @@ export const preferences: StoreonModule<State, Events> = (store) => {
 
   store.on(PREFERENCES_EVENTS.TOGGLE_THEME, ({ preferences }) => {
     const themeType = preferences.themeType === 'dark' ? 'light' : 'dark'
-    const newPreferences: PreferencesStore = { ...preferences, themeType }
+    const newPreferences: PreferencesStore = update(preferences, { themeType: { $set: themeType } })
 
-    try {
-      // TODO: add debounce
-      // do not await this
-      AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(newPreferences))
-    } catch (error) {
-      if (__DEV__) {
-        console.log(error)
-      }
+    debounceStorage('preferences', newPreferences)
+
+    updateStatusBar(themeType)
+
+    return {
+      preferences: newPreferences,
     }
+  })
 
-    updateSatusBar(themeType)
+  store.on(PREFERENCES_EVENTS.UPDATE_CLOCKIFY, ({ preferences }, updates) => {
+    const newPreferences = update(preferences, { clockify: { $merge: updates } })
+
+    debounceStorage('preferences', newPreferences)
+
+    // schedule notification
+    upsertClockifyReminder(newPreferences.clockify)
 
     return {
       preferences: newPreferences,
@@ -58,7 +80,7 @@ export const preferences: StoreonModule<State, Events> = (store) => {
   })
 }
 
-function updateSatusBar (themeType: ThemeType) {
+function updateStatusBar (themeType: ThemeType) {
   // if the app is not active this function call is useless and can cause problems
   if (AppState.currentState !== 'active') return
 

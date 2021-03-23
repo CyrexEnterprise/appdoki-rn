@@ -13,7 +13,7 @@ export default StyleSheet.create({
     padding: 16,
     paddingHorizontal: 24,
   },
-  avatarConatiner: {
+  avatarContainer: {
     marginRight: 18,
   },
   listHeader: {

@@ -21,7 +21,7 @@ export const GiveBeerListScreen: React.FC<GiveBeerListScreenProps> = ({ navigati
     return (
       <TouchableOpacity onPress={() => navigation.navigate('GiveBeer', item)}>
         <View style={[styles.row, styles.item, { backgroundColor: colors.surface }]}>
-          <View style={styles.avatarConatiner}>
+          <View style={styles.avatarContainer}>
             <SharedElement id={`item.${item.id}.avatar`}>
               {item.picture ? (
                 <Avatar.Image size={50} source={{ uri: item.picture }} />

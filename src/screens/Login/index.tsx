@@ -58,7 +58,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
             return (
               <Paragraph>
                 You are not in the last stable version of Appdoki.
-                {' '}Please update the app to prevent unexpected behaviours.
+                {' '}Please update the app to prevent unexpected behaviour.
               </Paragraph>
             )
           },

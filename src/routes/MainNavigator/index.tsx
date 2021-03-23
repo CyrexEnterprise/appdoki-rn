@@ -12,6 +12,8 @@ import { BottomNavigator } from 'routes/BottomNavigator'
 import { AppTitleContainer } from 'components/AppTitleContainer'
 import { GiveBeerListScreen } from 'screens/GiveBeerList'
 import { GiveBeerScreen } from 'screens/GiveBeer'
+import { BottomSheetScreen } from 'screens/BottomSheet'
+import { PreferencesScreen } from 'screens/Preferences'
 
 import styles from './styles'
 import { MainNavigatorParamsList } from './types'
@@ -73,6 +75,7 @@ export const MainNavigator = () => {
     <Stack.Navigator
       initialRouteName='Home'
       headerMode='screen'
+      mode='modal'
       screenOptions={{ header: renderHeader }}
     >
       <Stack.Screen
@@ -104,6 +107,26 @@ export const MainNavigator = () => {
         sharedElementsConfig={(route) => {
           const { id } = route.params
           return [`item.${id}.avatar`]
+        }}
+      />
+
+      <Stack.Screen
+        name='BottomSheet'
+        component={BottomSheetScreen}
+        options={{
+          header: () => null,
+          animationEnabled: false,
+          gestureEnabled: false,
+          cardStyle: { backgroundColor: 'transparent' },
+        }}
+      />
+
+      <Stack.Screen
+        name='Preferences'
+        component={PreferencesScreen}
+        options={{
+          gestureEnabled: true,
+          ...TransitionPresets.SlideFromRightIOS,
         }}
       />
     </Stack.Navigator>

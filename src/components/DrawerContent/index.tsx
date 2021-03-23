@@ -94,6 +94,25 @@ export const DrawerContent = (props: DrawerContentProps) => {
               </View>
             </View>
           </TouchableRipple>
+
+          <TouchableRipple
+            onPress={() => dispatch(PREFERENCES_EVENTS.UPDATE_CLOCKIFY, { on: !preferences.clockify.on })}
+          >
+            <View style={styles.preference}>
+              <Text>Clockify Reminder</Text>
+              <View pointerEvents='none'>
+                <Switch value={preferences.clockify.on} color={theme.colors.primary} />
+              </View>
+            </View>
+          </TouchableRipple>
+        </Drawer.Section>
+
+        <Drawer.Section>
+          <DrawerItem
+            icon={({ color, size }) => <Icon name='account-cog-outline' color={color} size={size} />}
+            label='All Preferences'
+            onPress={() => props.navigation.navigate('Preferences')}
+          />
         </Drawer.Section>
       </Animated.View>
     </DrawerContentScrollView>

@@ -1,7 +1,8 @@
-import { AppRegistry, LogBox } from 'react-native'
+import { AppRegistry, Linking, LogBox } from 'react-native'
 import messaging from '@react-native-firebase/messaging'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { MESSAGES_KEY } from 'constants/global'
+import notifee, { EventType } from '@notifee/react-native'
+import { ACTION_PRESS_IDS, CLOCKIFY_URL, MESSAGES_KEY } from 'constants/global'
 import { name as appName } from './app.json'
 
 // This should be called as soon as possible
@@ -30,6 +31,28 @@ messaging().setBackgroundMessageHandler(async (message) => {
   } catch (error) {
     if (__DEV__) {
       console.log(error)
+    }
+  }
+})
+
+// handle to notification interactions
+notifee.onBackgroundEvent(async ({ type, detail }) => {
+  const { notification, pressAction } = detail
+
+  try {
+    if (type === EventType.ACTION_PRESS && pressAction?.id) {
+      if (pressAction.id === ACTION_PRESS_IDS.openClockify) {
+        await Linking.openURL(CLOCKIFY_URL)
+      }
+    }
+  } catch (error) {
+    if (__DEV__) {
+      console.log('error trying to handle action', error)
+    }
+  } finally {
+    if (type === EventType.ACTION_PRESS && pressAction?.id !== ACTION_PRESS_IDS.openClockify) {
+      // close the notification
+      await notifee.cancelNotification(notification.id)
     }
   }
 })

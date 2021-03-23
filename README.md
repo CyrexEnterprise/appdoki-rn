@@ -102,4 +102,8 @@ git checkout <TAG> # e.g: v1.0.1-alpha.0
 
 <br>
 
-Follow the steps in [fastlane readme](https://github.com/Cloudoki/appdoki-rn/blob/master/fastlane/README.md). **Note:** for `alpha` lanes you need to [log in on firebase](https://firebase.google.com/docs/cli#sign-in-test-cli).
+Follow the steps in [fastlane readme](https://github.com/Cloudoki/appdoki-rn/blob/master/fastlane/README.md).
+
+**NOTE:**
+  - Bear in mind that some variables in your `.env` file differ for android and ios
+  - For `alpha` lanes you need to [login on firebase](https://firebase.google.com/docs/cli#sign-in-test-cli)
