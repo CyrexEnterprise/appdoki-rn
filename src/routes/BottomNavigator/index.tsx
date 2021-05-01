@@ -8,6 +8,7 @@ import overlay from 'util/overlay'
 import { FeedScreen } from 'screens/Feed'
 import { NotificationsScreen } from 'screens/Notifications'
 import { BeerTab } from 'screens/BeerTab'
+import { Zoom } from 'components/Animations/Zoom'
 
 import { BottomNavigatorProps } from './types'
 
@@ -87,18 +88,23 @@ export const BottomNavigator = ({ route }: BottomNavigatorProps) => {
       </Tab.Navigator>
 
       <Portal>
-        <FAB
-          visible={isFocused}
-          icon={icon}
+        <Zoom
+          show={routeName === 'BeerTab'}
+          maxZoomOut={0}
           style={{
             position: 'absolute',
             bottom: safeArea.bottom + 65,
             right: 16,
           }}
-          color='white'
-          theme={{ colors: { accent: theme.colors.primary } }}
-          onPress={handleFabPress}
-        />
+        >
+          <FAB
+            visible={isFocused}
+            icon={icon}
+            color='white'
+            theme={{ colors: { accent: theme.colors.primary } }}
+            onPress={handleFabPress}
+          />
+        </Zoom>
       </Portal>
     </>
   )
