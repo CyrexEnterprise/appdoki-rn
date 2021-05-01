@@ -68,7 +68,7 @@ export const withDecay = (params: WithDecayParams) => {
   }
   const config = {
     toValue: new Value(0),
-    duration: new Value(1000),
+    duration: new Value(500),
     easing: Easing.bezier(0.22, 1, 0.36, 1),
   }
   return block([

@@ -73,6 +73,7 @@ export const preferences: StoreonModule<State, Events> = (store) => {
 
     // schedule notification
     upsertClockifyReminder(newPreferences.clockify)
+      .catch((error) => console.warn('Failed to to upsert Clockify Reminder:', error))
 
     return {
       preferences: newPreferences,

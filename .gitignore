@@ -65,4 +65,4 @@ GoogleService-Info.plist
 google-services.json
 ios/tmp.xcconfig
 fastlane/report.xml
-notifee.config.json
+notifee.*.json
