@@ -28,14 +28,14 @@ export const BottomSheetScreen: React.FC<BottomSheetScreenProps> = ({ navigation
     if (bsRef.current) {
       bsRef.current.snapTo(snapPoints.current.length - 2)
     }
-  }, [bsRef, snapPoints])
+  }, [])
 
   // Animate on close - onCloseEnd will be called after
   const onOverlayPress = useCallback(() => {
     if (bsRef.current) {
       bsRef.current.snapTo(snapPoints.current.length - 1)
     }
-  }, [bsRef, snapPoints])
+  }, [])
 
   // pop position in the navigation stack so the screen behind become interactive
   const handleOnCloseEnd = useCallback(() => {
@@ -56,7 +56,9 @@ export const BottomSheetScreen: React.FC<BottomSheetScreenProps> = ({ navigation
 
       BackHandler.addEventListener('hardwareBackPress', onBackPress)
 
-      return () => BackHandler.removeEventListener('hardwareBackPress', onBackPress)
+      return () => {
+        BackHandler.removeEventListener('hardwareBackPress', onBackPress)
+      }
     }, [onOverlayPress]),
   )
 
@@ -97,6 +99,8 @@ export const BottomSheetScreen: React.FC<BottomSheetScreenProps> = ({ navigation
         initialSnap={snapPoints.current.length - 1}
         renderContent={renderBSContent}
         renderHeader={renderHeader}
+        // TODO: this callback seems not to fire randomly
+        // the use case found was in using a <Picker /> as content which also has reanimated logic. related?
         onCloseEnd={handleOnCloseEnd}
         enabledContentGestureInteraction={false}
       />
