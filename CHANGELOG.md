@@ -1,5 +1,14 @@
 # Change Log
 
+<a name="v1.0.1-alpha.2"></a>
+## [v1.0.1-alpha.2](https://github.com/Cloudoki/appdoki-rn/compare/v1.0.1-alpha.1...v1.0.1-alpha.2)
+###### *May 3, 2021*
+
+### Performance Improvements
+
+* **other:** minimize preferences freeze (#31) ([97db721](https://github.com/Cloudoki/appdoki-rn/commit/97db721)),
+
+
 <a name="v1.0.1-alpha.1"></a>
 ## [v1.0.1-alpha.1](https://github.com/Cloudoki/appdoki-rn/compare/v1.0.1-alpha.0...v1.0.1-alpha.1)
 ###### *Mar 23, 2021*
