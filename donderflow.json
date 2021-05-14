@@ -1,4 +1,5 @@
 {
   "allowBranch": ["master"],
-  "bumpFilesFunc": "scripts/bumpFiles"
+  "bumpFilesFunc": "scripts/bumpFiles",
+  "releaseMessage": "chore(release): %s"
 }
