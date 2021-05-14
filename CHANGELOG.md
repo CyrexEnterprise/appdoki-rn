@@ -1,5 +1,14 @@
 # Change Log
 
+<a name="v1.0.1-alpha.3"></a>
+## [v1.0.1-alpha.3](https://github.com/Cloudoki/appdoki-rn/compare/v1.0.1-alpha.2...v1.0.1-alpha.3)
+###### *May 14, 2021*
+
+### Performance Improvements
+
+* **other:** update release signing (#32) ([09e712a](https://github.com/Cloudoki/appdoki-rn/commit/09e712a)),
+
+
 <a name="v1.0.1-alpha.2"></a>
 ## [v1.0.1-alpha.2](https://github.com/Cloudoki/appdoki-rn/compare/v1.0.1-alpha.1...v1.0.1-alpha.2)
 ###### *May 3, 2021*
